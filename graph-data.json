@@ -1,0 +1,2761 @@
+{
+  "metadata": {
+    "generated": "2026-03-30T05:48:46.142Z",
+    "sourceDir": "/Users/username/.claude/knowledge",
+    "nodeCount": 125,
+    "linkCount": 403,
+    "domains": [
+      "business",
+      "checkpoints",
+      "decisions",
+      "external",
+      "meta",
+      "patterns",
+      "phantom",
+      "projects",
+      "runbooks",
+      "workflow"
+    ]
+  },
+  "nodes": [
+    {
+      "id": "_index",
+      "name": "Index",
+      "domain": "meta",
+      "type": "hub",
+      "description": "Entry point to the skill graph \u2014 traversable cross-project knowledge",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 0,
+      "outDegree": 7
+    },
+    {
+      "id": "_resolve",
+      "name": "Resolve",
+      "domain": "meta",
+      "type": "meta",
+      "description": "Convention for resolving [[wikilinks]] across the knowledge graph and into rules/skills/memory",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 0
+    },
+    {
+      "id": "decisions/_moc-decisions",
+      "name": "MOC: Decisions",
+      "domain": "decisions",
+      "type": "moc",
+      "description": "Map of Content \u2014 Architecture Decision Records: why we chose X over Y",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 2,
+      "outDegree": 12
+    },
+    {
+      "id": "decisions/adr-cdn-on-drive",
+      "name": "ADR: Cdn On Drive",
+      "domain": "decisions",
+      "type": "leaf",
+      "description": "ADR: CDN projects (no build system) stay on Google Drive for easy access",
+      "created": "2026-02-18",
+      "source": null,
+      "status": "accepted",
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 3
+    },
+    {
+      "id": "decisions/adr-chromadb-for-project-theta",
+      "name": "ADR: Chromadb For Project Theta",
+      "domain": "decisions",
+      "type": "leaf",
+      "description": "ADR: Project Theta uses ChromaDB for local vector storage \u2014 no cloud dependency, Python-native",
+      "created": "2026-02-18",
+      "source": null,
+      "status": "accepted",
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 3
+    },
+    {
+      "id": "decisions/adr-drizzle-over-prisma",
+      "name": "ADR: Drizzle Over Prisma",
+      "domain": "decisions",
+      "type": "leaf",
+      "description": "ADR: Project Epsilon Platform chose Drizzle ORM over Prisma for lighter weight and SQL-like syntax",
+      "created": "2026-02-18",
+      "source": null,
+      "status": "accepted",
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 2
+    },
+    {
+      "id": "decisions/adr-firebase-db-only",
+      "name": "ADR: Firebase Db Only",
+      "domain": "decisions",
+      "type": "leaf",
+      "description": "ADR: TRP uses Firebase for database but Cloudflare Pages for hosting \u2014 split architecture",
+      "created": "2026-02-18",
+      "source": null,
+      "status": "accepted",
+      "priority": null,
+      "inDegree": 2,
+      "outDegree": 2
+    },
+    {
+      "id": "decisions/adr-firebase-spark",
+      "name": "ADR: Firebase Spark",
+      "domain": "decisions",
+      "type": "leaf",
+      "description": "ADR: TRP stays on Firebase Spark (free) \u2014 Security Rules replace Cloud Functions",
+      "created": "2026-02-18",
+      "source": null,
+      "status": "accepted",
+      "priority": null,
+      "inDegree": 3,
+      "outDegree": 2
+    },
+    {
+      "id": "decisions/adr-git-relay",
+      "name": "ADR: Git Relay",
+      "domain": "decisions",
+      "type": "leaf",
+      "description": "ADR: Brand B+Brand A deploy evolution \u2014 from Drive relay to React SSG to GitHub Actions CI/CD",
+      "created": "2026-02-18",
+      "source": null,
+      "status": "superseded",
+      "priority": null,
+      "inDegree": 3,
+      "outDegree": 1
+    },
+    {
+      "id": "decisions/adr-groq-for-concierge",
+      "name": "ADR: Groq For Concierge",
+      "domain": "decisions",
+      "type": "leaf",
+      "description": "ADR: Project Epsilon uses Groq/Llama for the AI concierge \u2014 fast, free tier, runs via CF Worker",
+      "created": "2026-02-18",
+      "source": null,
+      "status": "accepted",
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 2
+    },
+    {
+      "id": "decisions/adr-hosting-split",
+      "name": "ADR: Hosting Split",
+      "domain": "decisions",
+      "type": "leaf",
+      "description": "ADR: Different projects use different hosting because each platform has a sweet spot",
+      "created": "2026-02-18",
+      "source": null,
+      "status": "accepted",
+      "priority": null,
+      "inDegree": 4,
+      "outDegree": 2
+    },
+    {
+      "id": "decisions/adr-mock-data-first",
+      "name": "ADR: Mock Data First",
+      "domain": "decisions",
+      "type": "leaf",
+      "description": "ADR: Project Eta built full UI with mock data before any backend \u2014 nail the UX first",
+      "created": "2026-02-18",
+      "source": null,
+      "status": "accepted",
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 3
+    },
+    {
+      "id": "decisions/adr-supabase-over-firebase",
+      "name": "ADR: Supabase Over Firebase",
+      "domain": "decisions",
+      "type": "leaf",
+      "description": "ADR: Project Epsilon Platform chose Supabase (PostgreSQL) over Firebase (NoSQL) for relational data",
+      "created": "2026-02-18",
+      "source": null,
+      "status": "accepted",
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 3
+    },
+    {
+      "id": "decisions/adr-vite-over-nextjs",
+      "name": "ADR: Vite Over Nextjs",
+      "domain": "decisions",
+      "type": "leaf",
+      "description": "ADR: Project Delta Planner uses Vite/React instead of Next.js \u2014 SPA doesn't need SSR",
+      "created": "2026-02-18",
+      "source": null,
+      "status": "accepted",
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 2
+    },
+    {
+      "id": "decisions/adr-workspace-tiers",
+      "name": "ADR: Workspace Tiers",
+      "domain": "decisions",
+      "type": "leaf",
+      "description": "ADR: Three-tier workspace \u2014 Drive for docs, GitHub for backup, local SSD for development",
+      "created": "2026-02-18",
+      "source": null,
+      "status": "accepted",
+      "priority": null,
+      "inDegree": 5,
+      "outDegree": 2
+    },
+    {
+      "id": "dependencies",
+      "name": "Dependencies",
+      "domain": "meta",
+      "type": "meta",
+      "description": "Project dependency map \u2014 which shared infrastructure affects which projects. Check here for impact analysis.",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 2,
+      "outDegree": 1
+    },
+    {
+      "id": "patterns/_moc-patterns",
+      "name": "MOC: Patterns",
+      "domain": "patterns",
+      "type": "moc",
+      "description": "Map of Content \u2014 16 cross-project engineering patterns distilled from bugs, fixes, and architecture",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 16
+    },
+    {
+      "id": "patterns/atomic-file-operations",
+      "name": "Atomic File Operations",
+      "domain": "patterns",
+      "type": "leaf",
+      "description": "Temp file + fsync + atomic rename prevents partial writes and data corruption",
+      "created": "2026-02-18",
+      "source": "Project Theta project_config.py \u2014 atomic_write_json()",
+      "status": null,
+      "priority": null,
+      "inDegree": 7,
+      "outDegree": 3
+    },
+    {
+      "id": "patterns/cache-integrity",
+      "name": "Cache Integrity",
+      "domain": "patterns",
+      "type": "leaf",
+      "description": "Dual-source caching needs merge-on-read and auto-healing to prevent silent drift",
+      "created": "2026-02-18",
+      "source": "Project Theta indexer.py \u2014 session cache + ChromaDB integrity",
+      "status": null,
+      "priority": null,
+      "inDegree": 8,
+      "outDegree": 3
+    },
+    {
+      "id": "patterns/cdn-vs-build-projects",
+      "name": "Cdn Vs Build Projects",
+      "domain": "patterns",
+      "type": "leaf",
+      "description": "CDN projects live on Drive; build-system projects must live on local SSD",
+      "created": "2026-02-18",
+      "source": "memory:workspace-setup, CLAUDE.md > Workspace Architecture",
+      "status": null,
+      "priority": null,
+      "inDegree": 11,
+      "outDegree": 2
+    },
+    {
+      "id": "patterns/cloudflare-deploy-pipeline",
+      "name": "Cloudflare Deploy Pipeline",
+      "domain": "patterns",
+      "type": "leaf",
+      "description": "Three-step Cloudflare Workers pipeline: build \u2192 build:cloudflare \u2192 wrangler deploy",
+      "created": "2026-02-18",
+      "source": "lessons.md > Architecture Decisions",
+      "status": null,
+      "priority": null,
+      "inDegree": 8,
+      "outDegree": 3
+    },
+    {
+      "id": "patterns/composable-workflows",
+      "name": "Composable Workflows",
+      "domain": "patterns",
+      "type": "leaf",
+      "description": "Single \u2192 Dual \u2192 Triple tech composition builds complex workflows from simple, tested pieces",
+      "created": "2026-02-18",
+      "source": "Project Theta techs.py \u2014 composable tech system",
+      "status": null,
+      "priority": null,
+      "inDegree": 8,
+      "outDegree": 3
+    },
+    {
+      "id": "patterns/content-classification",
+      "name": "Content Classification",
+      "domain": "patterns",
+      "type": "leaf",
+      "description": "Classify by content patterns (imports, keywords, structure), not file paths",
+      "created": "2026-02-18",
+      "source": "Project Theta project_classifier.py \u2014 regex-based project detection",
+      "status": null,
+      "priority": null,
+      "inDegree": 5,
+      "outDegree": 2
+    },
+    {
+      "id": "patterns/data-corruption-recovery",
+      "name": "Data Corruption Recovery",
+      "domain": "patterns",
+      "type": "leaf",
+      "description": "Code fixes alone don't fix corrupted data \u2014 always rebuild/re-seed after data-layer bug fixes",
+      "created": "2026-02-18",
+      "source": "lessons.md > Process & Debugging, Project Theta timestamp saga",
+      "status": null,
+      "priority": null,
+      "inDegree": 7,
+      "outDegree": 3
+    },
+    {
+      "id": "patterns/dirty-checking",
+      "name": "Dirty Checking",
+      "domain": "patterns",
+      "type": "leaf",
+      "description": "Dirty-check init and compare must reference the exact same data source or the save button lies",
+      "created": "2026-02-18",
+      "source": "lessons.md > Data Storage & Persistence",
+      "status": null,
+      "priority": null,
+      "inDegree": 6,
+      "outDegree": 3
+    },
+    {
+      "id": "patterns/dual-source-merge",
+      "name": "Dual Source Merge",
+      "domain": "patterns",
+      "type": "leaf",
+      "description": "Tag entries with their origin store so delete handlers hit the correct persistence layer",
+      "created": "2026-02-18",
+      "source": "lessons.md > Data Storage & Persistence",
+      "status": null,
+      "priority": null,
+      "inDegree": 4,
+      "outDegree": 3
+    },
+    {
+      "id": "patterns/env-file-management",
+      "name": "Env File Management",
+      "domain": "patterns",
+      "type": "leaf",
+      "description": "Gitignored .env files need manual copying, dots-in-username encoding, and Vercel newline traps",
+      "created": "2026-02-18",
+      "source": "memory:lessons > Supabase Lessons, memory:workspace-setup",
+      "status": null,
+      "priority": null,
+      "inDegree": 6,
+      "outDegree": 2
+    },
+    {
+      "id": "patterns/firebase-hosting-checklist",
+      "name": "Firebase Hosting Checklist",
+      "domain": "patterns",
+      "type": "leaf",
+      "description": "Firebase Hosting needs firebase.json hosting section + .firebaserc project link + curl verify",
+      "created": "2026-02-18",
+      "source": "lessons.md > Deployment & Infrastructure, Project Beta 404 incident",
+      "status": null,
+      "priority": null,
+      "inDegree": 9,
+      "outDegree": 3
+    },
+    {
+      "id": "patterns/hybrid-search",
+      "name": "Hybrid Search",
+      "domain": "patterns",
+      "type": "leaf",
+      "description": "Semantic embeddings + full-text matching beats either approach alone",
+      "created": "2026-02-18",
+      "source": "Project Theta README.md, fork_detect.py \u2014 dual search strategy",
+      "status": null,
+      "priority": null,
+      "inDegree": 5,
+      "outDegree": 2
+    },
+    {
+      "id": "patterns/idb-write-through",
+      "name": "Idb Write Through",
+      "domain": "patterns",
+      "type": "leaf",
+      "description": "IndexedDB putAll only upserts \u2014 use clear()+putAll() for true write-through sync",
+      "created": "2026-02-18",
+      "source": "lessons.md > Data Storage & Persistence",
+      "status": null,
+      "priority": null,
+      "inDegree": 4,
+      "outDegree": 3
+    },
+    {
+      "id": "patterns/lock-files",
+      "name": "Lock Files",
+      "domain": "patterns",
+      "type": "leaf",
+      "description": "PID-based lock files with stale detection prevent concurrent access and survive crashes",
+      "created": "2026-02-18",
+      "source": "Project Theta project_config.py \u2014 IndexLock class",
+      "status": null,
+      "priority": null,
+      "inDegree": 5,
+      "outDegree": 2
+    },
+    {
+      "id": "patterns/persistence-layers",
+      "name": "Persistence Layers",
+      "domain": "patterns",
+      "type": "leaf",
+      "description": "Multiple storage layers desync silently without deliberate write-through protocols",
+      "created": "2026-02-18",
+      "source": "lessons.md > Data Storage & Persistence, rule:Project Alpha-portal",
+      "status": null,
+      "priority": null,
+      "inDegree": 10,
+      "outDegree": 4
+    },
+    {
+      "id": "patterns/rate-limiting",
+      "name": "Rate Limiting",
+      "domain": "patterns",
+      "type": "leaf",
+      "description": "FMP needs 300ms sequential gaps; Cloudflare Workers cap at 50 subrequests on free plan",
+      "created": "2026-02-18",
+      "source": "lessons.md > Architecture Decisions",
+      "status": null,
+      "priority": null,
+      "inDegree": 7,
+      "outDegree": 1
+    },
+    {
+      "id": "projects/_moc-projects",
+      "name": "MOC: Projects",
+      "domain": "projects",
+      "type": "moc",
+      "description": "Map of Content \u2014 deep graphs for all 9 projects with architecture nodes",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 3,
+      "outDegree": 9
+    },
+    {
+      "id": "projects/project-epsilon/_moc-project-epsilon",
+      "name": "MOC: Project Epsilon",
+      "domain": "projects",
+      "type": "moc",
+      "description": "Map of Content \u2014 Project Epsilon: React 19 SSG dual-site (Brand B+Brand A), GitHub Actions CI/CD, Klausy AI concierge",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 2,
+      "outDegree": 4
+    },
+    {
+      "id": "projects/project-epsilon/epsilon-ai-concierge",
+      "name": "epsilon Ai Concierge",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "Klausy AI chatbot via Cloudflare Worker + Groq API (Llama) for German tourist assistance",
+      "created": "2026-02-18",
+      "source": "rule:Project Epsilon",
+      "status": null,
+      "priority": null,
+      "inDegree": 3,
+      "outDegree": 2
+    },
+    {
+      "id": "projects/project-epsilon/epsilon-git-relay",
+      "name": "epsilon Git Relay",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "Brand B+Brand A CI/CD: push to main \u2192 GitHub Actions \u2192 typecheck \u2192 build \u2192 deploy both sites to Cloudflare Pages",
+      "created": "2026-02-18",
+      "source": "rule:Project Epsilon, memory:MEMORY",
+      "status": null,
+      "priority": null,
+      "inDegree": 2,
+      "outDegree": 3
+    },
+    {
+      "id": "projects/project-epsilon Platform/_moc-project-epsilon Platform",
+      "name": "MOC: Project Epsilon Platform",
+      "domain": "projects",
+      "type": "moc",
+      "description": "Map of Content \u2014 Brand B Platform: Drizzle/Supabase, 3-role auth, route groups",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 5
+    },
+    {
+      "id": "projects/project-epsilon Platform/epsilon-platform-database-schema",
+      "name": "epsilon-platform Database Schema",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "6 tables + 3 pgEnums managed by Drizzle ORM with Supabase PostgreSQL",
+      "created": "2026-02-18",
+      "source": "rule:Project Epsilon Platform, memory:MEMORY.md",
+      "status": null,
+      "priority": null,
+      "inDegree": 4,
+      "outDegree": 2
+    },
+    {
+      "id": "projects/project-epsilon Platform/epsilon-platform-role-based-auth",
+      "name": "epsilon-platform Role Based Auth",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "3-role system (traveler/provider/admin) with role in JWT and role-based middleware",
+      "created": "2026-02-18",
+      "source": "rule:Project Epsilon Platform, memory:MEMORY.md",
+      "status": null,
+      "priority": null,
+      "inDegree": 3,
+      "outDegree": 2
+    },
+    {
+      "id": "projects/project-epsilon Platform/epsilon-platform-supabase-connection",
+      "name": "epsilon-platform Supabase Connection",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "Supabase pooler connection with %2E encoding, IPv6 gotcha, and env backup on Drive",
+      "created": "2026-02-18",
+      "source": "memory:MEMORY.md > Supabase Lessons, rule:Project Epsilon Platform",
+      "status": null,
+      "priority": null,
+      "inDegree": 5,
+      "outDegree": 3
+    },
+    {
+      "id": "projects/bobs-project-zeta/_moc-bobs-project-zeta",
+      "name": "MOC: Bobs Project Zeta",
+      "domain": "projects",
+      "type": "moc",
+      "description": "Map of Content \u2014 Bob's Project Zeta: Next.js 16 stock dashboard, yahoo-finance2 + FMP APIs",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 3
+    },
+    {
+      "id": "projects/bobs-project-zeta/bsp-api-integration",
+      "name": "Bsp Api Integration",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "Dual data sources (yahoo-finance2 + FMP) with rate limiting, sequential fetching, and retry logic",
+      "created": "2026-02-18",
+      "source": "memory:lessons > Architecture Decisions",
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 2
+    },
+    {
+      "id": "projects/project-theta/_moc-project-theta",
+      "name": "MOC: Project Theta",
+      "domain": "projects",
+      "type": "moc",
+      "description": "Map of Content \u2014 Project Theta: session indexing, vector search, composable techs, project health",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 2,
+      "outDegree": 13
+    },
+    {
+      "id": "projects/project-theta/project-theta-data-model",
+      "name": "Project Theta Data Model",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "ChromaDB is source of truth; JSON caches auto-sync; gates and summaries are separate stores",
+      "created": "2026-02-18",
+      "source": "rule:Project Theta > Data Directory, project_config.py",
+      "status": null,
+      "priority": null,
+      "inDegree": 5,
+      "outDegree": 4
+    },
+    {
+      "id": "projects/project-theta/project-theta-indexing",
+      "name": "Project Theta Indexing",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "Session indexing with cache integrity, lock files, active session detection, and large file truncation",
+      "created": "2026-02-18",
+      "source": "Project Theta indexer.py, project_config.py",
+      "status": null,
+      "priority": null,
+      "inDegree": 6,
+      "outDegree": 6
+    },
+    {
+      "id": "projects/project-theta/project-theta-project-health",
+      "name": "Project Theta Project Health",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "Lavos scanner: tech debt detection, project health monitoring, reminder.md generation",
+      "created": "2026-02-18",
+      "source": "Project Theta lavos.py",
+      "status": null,
+      "priority": null,
+      "inDegree": 2,
+      "outDegree": 3
+    },
+    {
+      "id": "projects/project-theta/project-theta-search",
+      "name": "Project Theta Search",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "Hybrid search combining semantic vectors + full-text matching with era-based time filtering",
+      "created": "2026-02-18",
+      "source": "Project Theta Project Theta.py, fork_detect.py, README.md",
+      "status": null,
+      "priority": null,
+      "inDegree": 3,
+      "outDegree": 3
+    },
+    {
+      "id": "projects/project-theta/project-theta-techs",
+      "name": "Project Theta Techs",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "Composable workflow automation: fire (build), ice (test), single\u2192dual\u2192triple tech patterns",
+      "created": "2026-02-18",
+      "source": "Project Theta techs.py, techs.json",
+      "status": null,
+      "priority": null,
+      "inDegree": 2,
+      "outDegree": 3
+    },
+    {
+      "id": "projects/brand-a/_moc-brand-a",
+      "name": "MOC: brand-a",
+      "domain": "projects",
+      "type": "moc",
+      "description": "Map of Content \u2014 brand-a: English-market static site fork, Cloudflare Pages, brand setup",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 3
+    },
+    {
+      "id": "projects/brand-a/brand-a-brand-fork",
+      "name": "Brand A Brand Fork",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "brand-a \u2014 English-market brand site, built from the same Brand B codebase, deployed via GitHub Actions CI/CD",
+      "created": "2026-02-18",
+      "source": "memory:MEMORY.md > brand-a",
+      "status": null,
+      "priority": null,
+      "inDegree": 2,
+      "outDegree": 1
+    },
+    {
+      "id": "projects/project-beta/_moc-project-beta",
+      "name": "MOC: Project Beta",
+      "domain": "projects",
+      "type": "moc",
+      "description": "Map of Content \u2014 Project Beta: Firebase-hosted CDN SPA, operations dashboard",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 4
+    },
+    {
+      "id": "projects/project-beta/mv-firebase-hosting",
+      "name": "Mv Firebase Hosting",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "Project Beta 404 incident \u2014 firebase.json hosting + .firebaserc + ignore patterns + curl verify",
+      "created": "2026-02-18",
+      "source": "memory:MEMORY.md > Project Beta Firebase Fix, memory:lessons",
+      "status": null,
+      "priority": null,
+      "inDegree": 2,
+      "outDegree": 2
+    },
+    {
+      "id": "projects/project-alpha/_moc-project-alpha",
+      "name": "MOC: Project Alpha",
+      "domain": "projects",
+      "type": "moc",
+      "description": "Map of Content \u2014 Project Alpha Portal deep architecture: storage, sidebar, smart merge, detail modal",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 7
+    },
+    {
+      "id": "projects/project-alpha/detail-modal-fields",
+      "name": "Detail Modal Fields",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "4-column campaign detail layout with dirty-field saving and Comms Center",
+      "created": "2026-02-18",
+      "source": "rule:Project Alpha-portal > Detail Modal section",
+      "status": null,
+      "priority": null,
+      "inDegree": 3,
+      "outDegree": 3
+    },
+    {
+      "id": "projects/project-alpha/sidebar-dual-render",
+      "name": "Sidebar Dual Render",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "Project Alpha sidebar has TWO renderers \u2014 expanded (Canvas) and collapsed (React). Both must update.",
+      "created": "2026-02-18",
+      "source": "rule:Project Alpha-portal > Sidebar Navigation section",
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 2
+    },
+    {
+      "id": "projects/project-alpha/smart-merge",
+      "name": "Smart Merge",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "Fresh data vs overrides: import timestamp determines which wins on sync",
+      "created": "2026-02-18",
+      "source": "rule:Project Alpha-portal > Pending Calculation & Smart Merge",
+      "status": null,
+      "priority": null,
+      "inDegree": 3,
+      "outDegree": 3
+    },
+    {
+      "id": "projects/project-alpha/storage-architecture",
+      "name": "Storage Architecture",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "Project Alpha has 4 persistence layers that must stay in sync \u2014 IDB, tempOverrides, metaOverrides, stap_material_data",
+      "created": "2026-02-18",
+      "source": "rule:Project Alpha-portal > Data Storage section",
+      "status": null,
+      "priority": null,
+      "inDegree": 3,
+      "outDegree": 7
+    },
+    {
+      "id": "projects/project-delta-planner/_moc-project-delta-planner",
+      "name": "MOC: Project Delta Planner",
+      "domain": "projects",
+      "type": "moc",
+      "description": "Map of Content \u2014 Project Delta Planner: personas, Firebase hybrid arch, AI integration",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 6
+    },
+    {
+      "id": "projects/project-delta-planner/trp-ai-integration",
+      "name": "Trp Ai Integration",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "Gemini AI via aiService.chat() with persona-aware system prompts and Travel Bestie branding",
+      "created": "2026-02-18",
+      "source": "memory:MEMORY.md > Project Delta Planner \u2014 Unified Personas",
+      "status": null,
+      "priority": null,
+      "inDegree": 2,
+      "outDegree": 2
+    },
+    {
+      "id": "projects/project-delta-planner/trp-firebase-hybrid",
+      "name": "Trp Firebase Hybrid",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "Direct Firestore calls + Security Rules instead of Cloud Functions \u2014 stays on free Spark plan",
+      "created": "2026-02-18",
+      "source": "rule:Project Delta-planner, rule:firebase",
+      "status": null,
+      "priority": null,
+      "inDegree": 4,
+      "outDegree": 2
+    },
+    {
+      "id": "projects/project-delta-planner/trp-personas-system",
+      "name": "Trp Personas System",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "7 unified personas defined once in personas.ts \u2014 consumed by every page and the AI service",
+      "created": "2026-02-18",
+      "source": "memory:MEMORY.md > Project Delta Planner \u2014 Unified Personas",
+      "status": null,
+      "priority": null,
+      "inDegree": 2,
+      "outDegree": 2
+    },
+    {
+      "id": "projects/project-eta/_moc-project-eta",
+      "name": "MOC: Project Eta",
+      "domain": "projects",
+      "type": "moc",
+      "description": "Map of Content \u2014 Project Eta: Next.js 15 dashboard, mock data layer, compliance engine, PM system",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 6
+    },
+    {
+      "id": "projects/project-eta/project-eta-app-shell",
+      "name": "Project Eta App Shell",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "AppShell client component controls sidebar/topbar/footer \u2014 simple mode strips chrome for drivers",
+      "created": "2026-02-18",
+      "source": "rule:Project Eta, memory:Project Eta.md",
+      "status": null,
+      "priority": null,
+      "inDegree": 3,
+      "outDegree": 2
+    },
+    {
+      "id": "projects/project-eta/project-eta-compliance-engine",
+      "name": "Project Eta Compliance Engine",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "6-tier compliance status logic (expired\u2192current) + PM alert engine (mileage + time triggers)",
+      "created": "2026-02-18",
+      "source": "memory:Project Eta.md",
+      "status": null,
+      "priority": null,
+      "inDegree": 4,
+      "outDegree": 2
+    },
+    {
+      "id": "projects/project-eta/project-eta-data-layer",
+      "name": "Project Eta Data Layer",
+      "domain": "projects",
+      "type": "leaf",
+      "description": "21 entity types with TypeScript interfaces in src/data/ \u2014 pure frontend mock data, API-swap ready",
+      "created": "2026-02-18",
+      "source": "memory:Project Eta.md, rule:Project Eta",
+      "status": null,
+      "priority": null,
+      "inDegree": 4,
+      "outDegree": 3
+    },
+    {
+      "id": "runbooks/_moc-runbooks",
+      "name": "MOC: Runbooks",
+      "domain": "runbooks",
+      "type": "moc",
+      "description": "Map of Content \u2014 step-by-step playbooks for common operations. Follow exactly, no improvising.",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 2,
+      "outDegree": 10
+    },
+    {
+      "id": "runbooks/rb-add-site-to-status",
+      "name": "Runbook: Add Site To Status",
+      "domain": "runbooks",
+      "type": "leaf",
+      "description": "Runbook: Register a new site in the /status skill for health checks and local serving",
+      "created": "2026-02-18",
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 2,
+      "outDegree": 2
+    },
+    {
+      "id": "runbooks/rb-project-theta-reindex",
+      "name": "Runbook: Project Theta Reindex",
+      "domain": "runbooks",
+      "type": "leaf",
+      "description": "Runbook: Rebuild Project Theta's entire index after bug fixes or data corruption",
+      "created": "2026-02-18",
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 3
+    },
+    {
+      "id": "runbooks/rb-deploy-project-epsilon",
+      "name": "Runbook: Deploy Project Epsilon",
+      "domain": "runbooks",
+      "type": "leaf",
+      "description": "Runbook: Deploy Project Epsilon + brand-a \u2014 GitHub Actions CI/CD (automated) or manual Wrangler fallback",
+      "created": "2026-02-18",
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 4,
+      "outDegree": 1
+    },
+    {
+      "id": "runbooks/rb-deploy-cloudflare-workers",
+      "name": "Runbook: Deploy Cloudflare Workers",
+      "domain": "runbooks",
+      "type": "leaf",
+      "description": "Runbook: Deploy Next.js to Cloudflare Workers via OpenNext \u2014 three mandatory steps",
+      "created": "2026-02-18",
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 2
+    },
+    {
+      "id": "runbooks/rb-deploy-firebase",
+      "name": "Runbook: Deploy Firebase",
+      "domain": "runbooks",
+      "type": "leaf",
+      "description": "Runbook: Deploy to Firebase Hosting \u2014 verify config, deploy, curl verify, /status check",
+      "created": "2026-02-18",
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 2
+    },
+    {
+      "id": "runbooks/rb-drive-sync-recovery",
+      "name": "Runbook: Drive Sync Recovery",
+      "domain": "runbooks",
+      "type": "leaf",
+      "description": "Runbook: Fix Google Drive sync storms from leaked node_modules, .git, or other dev artifacts",
+      "created": "2026-02-18",
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 2
+    },
+    {
+      "id": "runbooks/rb-fresh-clone",
+      "name": "Runbook: Fresh Clone",
+      "domain": "runbooks",
+      "type": "leaf",
+      "description": "Runbook: Clone a project from GitHub and get it running \u2014 .env, deps, verify",
+      "created": "2026-02-18",
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 2
+    },
+    {
+      "id": "runbooks/rb-new-firebase-project",
+      "name": "Runbook: New Firebase Project",
+      "domain": "runbooks",
+      "type": "leaf",
+      "description": "Runbook: Create and configure a new Firebase project \u2014 from scratch to deployed",
+      "created": "2026-02-18",
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 3
+    },
+    {
+      "id": "runbooks/rb-new-project-setup",
+      "name": "Runbook: New Project Setup",
+      "domain": "runbooks",
+      "type": "leaf",
+      "description": "Runbook: Full setup for a new project in the workspace \u2014 from idea to tracked",
+      "created": "2026-02-18",
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 2,
+      "outDegree": 4
+    },
+    {
+      "id": "runbooks/rb-project-intake",
+      "name": "Runbook: Project Intake",
+      "domain": "runbooks",
+      "type": "leaf",
+      "description": "MANDATORY intake for every new project \u2014 connects it to the full brain. No orphans.",
+      "created": "2026-02-18",
+      "source": null,
+      "status": null,
+      "priority": "critical",
+      "inDegree": 2,
+      "outDegree": 9
+    },
+    {
+      "id": "workflow/_moc-workflow",
+      "name": "MOC: Workflow",
+      "domain": "workflow",
+      "type": "moc",
+      "description": "Map of Content \u2014 how we work: daily routine, skills, planning, verification, self-improvement",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 15
+    },
+    {
+      "id": "workflow/anti-patterns",
+      "name": "Anti Patterns",
+      "domain": "workflow",
+      "type": "leaf",
+      "description": "Collected failures and what they teach \u2014 reference before repeating",
+      "created": "2026-02-18",
+      "source": "memory:lessons, Project Theta debugging saga, Project Alpha persistence bugs",
+      "status": null,
+      "priority": null,
+      "inDegree": 7,
+      "outDegree": 3
+    },
+    {
+      "id": "workflow/autonomous-bug-fixing",
+      "name": "Autonomous Bug Fixing",
+      "domain": "workflow",
+      "type": "leaf",
+      "description": "When given a bug report: just fix it. Zero user context-switching required.",
+      "created": "2026-02-18",
+      "source": "CLAUDE.md > Workflow Orchestration > Autonomous Bug Fixing",
+      "status": null,
+      "priority": null,
+      "inDegree": 2,
+      "outDegree": 3
+    },
+    {
+      "id": "workflow/demand-elegance",
+      "name": "Demand Elegance",
+      "domain": "workflow",
+      "type": "leaf",
+      "description": "Pause for non-trivial changes and ask 'is there a more elegant way?' \u2014 skip for obvious fixes",
+      "created": "2026-02-18",
+      "source": "CLAUDE.md > Workflow Orchestration > Demand Elegance",
+      "status": null,
+      "priority": null,
+      "inDegree": 2,
+      "outDegree": 2
+    },
+    {
+      "id": "workflow/morning-workflow",
+      "name": "Morning Workflow",
+      "domain": "workflow",
+      "type": "leaf",
+      "description": "The three-step morning routine: /primer all \u2192 /status \u2192 /primer <project>. Cold to warm in 60 seconds.",
+      "created": "2026-02-18",
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 8,
+      "outDegree": 11
+    },
+    {
+      "id": "workflow/plan-mode",
+      "name": "Plan Mode",
+      "domain": "workflow",
+      "type": "leaf",
+      "description": "Enter plan mode for any task with 3+ steps or architectural decisions",
+      "created": "2026-02-18",
+      "source": "CLAUDE.md > Workflow Orchestration > Plan Mode Default",
+      "status": null,
+      "priority": null,
+      "inDegree": 4,
+      "outDegree": 3
+    },
+    {
+      "id": "workflow/registry-pattern",
+      "name": "Registry Pattern",
+      "domain": "workflow",
+      "type": "leaf",
+      "description": "Data-driven extensibility: separate registries (sites.md, personas.ts) from logic",
+      "created": "2026-02-18",
+      "source": "memory:lessons > Tooling & Automation, Project Theta techs.py",
+      "status": null,
+      "priority": null,
+      "inDegree": 12,
+      "outDegree": 3
+    },
+    {
+      "id": "workflow/self-improvement-loop",
+      "name": "Self Improvement Loop",
+      "domain": "workflow",
+      "type": "leaf",
+      "description": "After any correction: update lessons.md \u2192 memory \u2192 rules. Ruthlessly iterate.",
+      "created": "2026-02-18",
+      "source": "CLAUDE.md > Workflow Orchestration > Self-Improvement Loop",
+      "status": null,
+      "priority": null,
+      "inDegree": 7,
+      "outDegree": 3
+    },
+    {
+      "id": "workflow/skill-project-theta",
+      "name": "Skill Project Theta",
+      "domain": "workflow",
+      "type": "leaf",
+      "description": "Project Theta \u2014 session search, time gates, composable techs. The institutional memory engine.",
+      "created": "2026-02-18",
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 3,
+      "outDegree": 5
+    },
+    {
+      "id": "workflow/skill-debt",
+      "name": "Skill Debt",
+      "domain": "workflow",
+      "type": "leaf",
+      "description": "/debt \u2014 Lavos tech debt scanner. Run after /primer when doing a quality pass.",
+      "created": "2026-02-18",
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 2,
+      "outDegree": 4
+    },
+    {
+      "id": "workflow/skill-primer",
+      "name": "Skill Primer",
+      "domain": "workflow",
+      "type": "leaf",
+      "description": "/primer \u2014 auto-gathers project context: git state, knowledge graph, Project Theta sessions, TODOs",
+      "created": "2026-02-18",
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 7,
+      "outDegree": 5
+    },
+    {
+      "id": "workflow/skill-reflect",
+      "name": "Skill Reflect",
+      "domain": "workflow",
+      "type": "leaf",
+      "description": "/reflect \u2014 end-of-session debrief with 3 gates: Progress, Quality, Output Verification.",
+      "created": "2026-03-03",
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 3,
+      "outDegree": 4
+    },
+    {
+      "id": "workflow/skill-spec",
+      "name": "Skill Spec",
+      "domain": "workflow",
+      "type": "leaf",
+      "description": "/spec \u2014 requirements-to-task converter. Standalone or inline from primer router.",
+      "created": "2026-03-03",
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 3,
+      "outDegree": 3
+    },
+    {
+      "id": "workflow/skill-status",
+      "name": "Skill Status",
+      "domain": "workflow",
+      "type": "leaf",
+      "description": "/status \u2014 health checks, local server launcher, browser tab opener. Keeps the lights on.",
+      "created": "2026-02-18",
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 4,
+      "outDegree": 5
+    },
+    {
+      "id": "workflow/subagent-strategy",
+      "name": "Subagent Strategy",
+      "domain": "workflow",
+      "type": "leaf",
+      "description": "One task per subagent \u2014 keep main context clean, throw compute at complexity",
+      "created": "2026-02-18",
+      "source": "CLAUDE.md > Workflow Orchestration > Subagent Strategy",
+      "status": null,
+      "priority": null,
+      "inDegree": 2,
+      "outDegree": 2
+    },
+    {
+      "id": "workflow/verification-before-done",
+      "name": "Verification Before Done",
+      "domain": "workflow",
+      "type": "leaf",
+      "description": "Never mark complete without proving it works \u2014 staff engineer standard",
+      "created": "2026-02-18",
+      "source": "CLAUDE.md > Workflow Orchestration > Verification Before Done",
+      "status": null,
+      "priority": null,
+      "inDegree": 6,
+      "outDegree": 3
+    },
+    {
+      "id": "external/skill:business",
+      "name": "skill:business",
+      "domain": "external",
+      "type": "external",
+      "description": "Cross-layer reference: skill:business",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 0,
+      "outDegree": 0
+    },
+    {
+      "id": "external/memory:workspace-setup",
+      "name": "memory:workspace-setup",
+      "domain": "external",
+      "type": "external",
+      "description": "Cross-layer reference: memory:workspace-setup",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 0
+    },
+    {
+      "id": "external/rule:firebase",
+      "name": "rule:firebase",
+      "domain": "external",
+      "type": "external",
+      "description": "Cross-layer reference: rule:firebase",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 4,
+      "outDegree": 0
+    },
+    {
+      "id": "external/memory:lessons",
+      "name": "memory:lessons",
+      "domain": "external",
+      "type": "external",
+      "description": "Cross-layer reference: memory:lessons",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 6,
+      "outDegree": 0
+    },
+    {
+      "id": "external/rule:project-alpha-portal",
+      "name": "rule:Project Alpha-portal",
+      "domain": "external",
+      "type": "external",
+      "description": "Cross-layer reference: rule:Project Alpha-portal",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 7,
+      "outDegree": 0
+    },
+    {
+      "id": "external/rule:project-epsilon",
+      "name": "rule:Project Epsilon",
+      "domain": "external",
+      "type": "external",
+      "description": "Cross-layer reference: rule:Project Epsilon",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 3,
+      "outDegree": 0
+    },
+    {
+      "id": "external/rule:project-epsilon Platform",
+      "name": "rule:Project Epsilon Platform",
+      "domain": "external",
+      "type": "external",
+      "description": "Cross-layer reference: rule:Project Epsilon Platform",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 0
+    },
+    {
+      "id": "external/rule:project-theta",
+      "name": "rule:Project Theta",
+      "domain": "external",
+      "type": "external",
+      "description": "Cross-layer reference: rule:Project Theta",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 0
+    },
+    {
+      "id": "external/rule:project-beta",
+      "name": "rule:Project Beta",
+      "domain": "external",
+      "type": "external",
+      "description": "Cross-layer reference: rule:Project Beta",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 0
+    },
+    {
+      "id": "external/rule:project-delta-planner",
+      "name": "rule:Project Delta-planner",
+      "domain": "external",
+      "type": "external",
+      "description": "Cross-layer reference: rule:Project Delta-planner",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 0
+    },
+    {
+      "id": "external/rule:project-eta",
+      "name": "rule:Project Eta",
+      "domain": "external",
+      "type": "external",
+      "description": "Cross-layer reference: rule:Project Eta",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 1,
+      "outDegree": 0
+    },
+    {
+      "id": "external/skill:status",
+      "name": "skill:status",
+      "domain": "external",
+      "type": "external",
+      "description": "Cross-layer reference: skill:status",
+      "created": null,
+      "source": null,
+      "status": null,
+      "priority": null,
+      "inDegree": 3,
+      "outDegree": 0
+    }
+  ],
+  "links": [
+    {
+      "source": "_index",
+      "target": "patterns/_moc-patterns"
+    },
+    {
+      "source": "_index",
+      "target": "workflow/_moc-workflow"
+    },
+    {
+      "source": "_index",
+      "target": "projects/_moc-projects"
+    },
+    {
+      "source": "_index",
+      "target": "decisions/_moc-decisions"
+    },
+    {
+      "source": "_index",
+      "target": "runbooks/_moc-runbooks"
+    },
+    {
+      "source": "_index",
+      "target": "dependencies"
+    },
+    {
+      "source": "_index",
+      "target": "_resolve"
+    },
+    {
+      "source": "decisions/_moc-decisions",
+      "target": "decisions/adr-hosting-split"
+    },
+    {
+      "source": "decisions/_moc-decisions",
+      "target": "decisions/adr-firebase-spark"
+    },
+    {
+      "source": "decisions/_moc-decisions",
+      "target": "decisions/adr-firebase-db-only"
+    },
+    {
+      "source": "decisions/_moc-decisions",
+      "target": "decisions/adr-supabase-over-firebase"
+    },
+    {
+      "source": "decisions/_moc-decisions",
+      "target": "decisions/adr-workspace-tiers"
+    },
+    {
+      "source": "decisions/_moc-decisions",
+      "target": "decisions/adr-cdn-on-drive"
+    },
+    {
+      "source": "decisions/_moc-decisions",
+      "target": "decisions/adr-git-relay"
+    },
+    {
+      "source": "decisions/_moc-decisions",
+      "target": "decisions/adr-mock-data-first"
+    },
+    {
+      "source": "decisions/_moc-decisions",
+      "target": "decisions/adr-drizzle-over-prisma"
+    },
+    {
+      "source": "decisions/_moc-decisions",
+      "target": "decisions/adr-vite-over-nextjs"
+    },
+    {
+      "source": "decisions/_moc-decisions",
+      "target": "decisions/adr-groq-for-concierge"
+    },
+    {
+      "source": "decisions/_moc-decisions",
+      "target": "decisions/adr-chromadb-for-project-theta"
+    },
+    {
+      "source": "decisions/adr-cdn-on-drive",
+      "target": "decisions/adr-git-relay"
+    },
+    {
+      "source": "decisions/adr-cdn-on-drive",
+      "target": "decisions/adr-workspace-tiers"
+    },
+    {
+      "source": "decisions/adr-cdn-on-drive",
+      "target": "patterns/cdn-vs-build-projects"
+    },
+    {
+      "source": "decisions/adr-chromadb-for-project-theta",
+      "target": "projects/project-theta/project-theta-data-model"
+    },
+    {
+      "source": "decisions/adr-chromadb-for-project-theta",
+      "target": "projects/project-theta/project-theta-indexing"
+    },
+    {
+      "source": "decisions/adr-chromadb-for-project-theta",
+      "target": "patterns/cache-integrity"
+    },
+    {
+      "source": "decisions/adr-drizzle-over-prisma",
+      "target": "projects/project-epsilon Platform/epsilon-platform-database-schema"
+    },
+    {
+      "source": "decisions/adr-drizzle-over-prisma",
+      "target": "projects/project-epsilon Platform/epsilon-platform-supabase-connection"
+    },
+    {
+      "source": "decisions/adr-firebase-db-only",
+      "target": "projects/project-delta-planner/trp-firebase-hybrid"
+    },
+    {
+      "source": "decisions/adr-firebase-db-only",
+      "target": "decisions/adr-hosting-split"
+    },
+    {
+      "source": "decisions/adr-firebase-spark",
+      "target": "projects/project-delta-planner/trp-firebase-hybrid"
+    },
+    {
+      "source": "decisions/adr-firebase-spark",
+      "target": "external/rule:firebase"
+    },
+    {
+      "source": "decisions/adr-git-relay",
+      "target": "runbooks/rb-deploy-project-epsilon"
+    },
+    {
+      "source": "decisions/adr-groq-for-concierge",
+      "target": "projects/project-epsilon/epsilon-ai-concierge"
+    },
+    {
+      "source": "decisions/adr-groq-for-concierge",
+      "target": "decisions/adr-firebase-db-only"
+    },
+    {
+      "source": "decisions/adr-hosting-split",
+      "target": "patterns/cloudflare-deploy-pipeline"
+    },
+    {
+      "source": "decisions/adr-hosting-split",
+      "target": "patterns/firebase-hosting-checklist"
+    },
+    {
+      "source": "decisions/adr-mock-data-first",
+      "target": "projects/project-eta/project-eta-data-layer"
+    },
+    {
+      "source": "decisions/adr-mock-data-first",
+      "target": "projects/project-eta/project-eta-compliance-engine"
+    },
+    {
+      "source": "decisions/adr-mock-data-first",
+      "target": "workflow/registry-pattern"
+    },
+    {
+      "source": "decisions/adr-supabase-over-firebase",
+      "target": "projects/project-epsilon Platform/epsilon-platform-supabase-connection"
+    },
+    {
+      "source": "decisions/adr-supabase-over-firebase",
+      "target": "projects/project-epsilon Platform/epsilon-platform-database-schema"
+    },
+    {
+      "source": "decisions/adr-supabase-over-firebase",
+      "target": "patterns/env-file-management"
+    },
+    {
+      "source": "decisions/adr-vite-over-nextjs",
+      "target": "projects/project-delta-planner/trp-firebase-hybrid"
+    },
+    {
+      "source": "decisions/adr-vite-over-nextjs",
+      "target": "decisions/adr-firebase-spark"
+    },
+    {
+      "source": "decisions/adr-workspace-tiers",
+      "target": "patterns/cdn-vs-build-projects"
+    },
+    {
+      "source": "decisions/adr-workspace-tiers",
+      "target": "decisions/adr-git-relay"
+    },
+    {
+      "source": "dependencies",
+      "target": "decisions/adr-hosting-split"
+    },
+    {
+      "source": "patterns/_moc-patterns",
+      "target": "patterns/persistence-layers"
+    },
+    {
+      "source": "patterns/_moc-patterns",
+      "target": "patterns/idb-write-through"
+    },
+    {
+      "source": "patterns/_moc-patterns",
+      "target": "patterns/dirty-checking"
+    },
+    {
+      "source": "patterns/_moc-patterns",
+      "target": "patterns/dual-source-merge"
+    },
+    {
+      "source": "patterns/_moc-patterns",
+      "target": "patterns/data-corruption-recovery"
+    },
+    {
+      "source": "patterns/_moc-patterns",
+      "target": "patterns/cache-integrity"
+    },
+    {
+      "source": "patterns/_moc-patterns",
+      "target": "patterns/firebase-hosting-checklist"
+    },
+    {
+      "source": "patterns/_moc-patterns",
+      "target": "patterns/cloudflare-deploy-pipeline"
+    },
+    {
+      "source": "patterns/_moc-patterns",
+      "target": "patterns/cdn-vs-build-projects"
+    },
+    {
+      "source": "patterns/_moc-patterns",
+      "target": "patterns/env-file-management"
+    },
+    {
+      "source": "patterns/_moc-patterns",
+      "target": "patterns/rate-limiting"
+    },
+    {
+      "source": "patterns/_moc-patterns",
+      "target": "patterns/atomic-file-operations"
+    },
+    {
+      "source": "patterns/_moc-patterns",
+      "target": "patterns/lock-files"
+    },
+    {
+      "source": "patterns/_moc-patterns",
+      "target": "patterns/content-classification"
+    },
+    {
+      "source": "patterns/_moc-patterns",
+      "target": "patterns/hybrid-search"
+    },
+    {
+      "source": "patterns/_moc-patterns",
+      "target": "patterns/composable-workflows"
+    },
+    {
+      "source": "patterns/atomic-file-operations",
+      "target": "patterns/lock-files"
+    },
+    {
+      "source": "patterns/atomic-file-operations",
+      "target": "patterns/cache-integrity"
+    },
+    {
+      "source": "patterns/atomic-file-operations",
+      "target": "patterns/data-corruption-recovery"
+    },
+    {
+      "source": "patterns/cache-integrity",
+      "target": "patterns/data-corruption-recovery"
+    },
+    {
+      "source": "patterns/cache-integrity",
+      "target": "patterns/persistence-layers"
+    },
+    {
+      "source": "patterns/cache-integrity",
+      "target": "patterns/atomic-file-operations"
+    },
+    {
+      "source": "patterns/cdn-vs-build-projects",
+      "target": "patterns/env-file-management"
+    },
+    {
+      "source": "patterns/cdn-vs-build-projects",
+      "target": "external/memory:workspace-setup"
+    },
+    {
+      "source": "patterns/cloudflare-deploy-pipeline",
+      "target": "patterns/firebase-hosting-checklist"
+    },
+    {
+      "source": "patterns/cloudflare-deploy-pipeline",
+      "target": "patterns/rate-limiting"
+    },
+    {
+      "source": "patterns/cloudflare-deploy-pipeline",
+      "target": "patterns/cdn-vs-build-projects"
+    },
+    {
+      "source": "patterns/composable-workflows",
+      "target": "patterns/content-classification"
+    },
+    {
+      "source": "patterns/composable-workflows",
+      "target": "patterns/hybrid-search"
+    },
+    {
+      "source": "patterns/composable-workflows",
+      "target": "external/memory:lessons"
+    },
+    {
+      "source": "patterns/content-classification",
+      "target": "patterns/hybrid-search"
+    },
+    {
+      "source": "patterns/content-classification",
+      "target": "patterns/composable-workflows"
+    },
+    {
+      "source": "patterns/data-corruption-recovery",
+      "target": "patterns/cache-integrity"
+    },
+    {
+      "source": "patterns/data-corruption-recovery",
+      "target": "external/memory:lessons"
+    },
+    {
+      "source": "patterns/data-corruption-recovery",
+      "target": "patterns/atomic-file-operations"
+    },
+    {
+      "source": "patterns/dirty-checking",
+      "target": "patterns/persistence-layers"
+    },
+    {
+      "source": "patterns/dirty-checking",
+      "target": "patterns/dual-source-merge"
+    },
+    {
+      "source": "patterns/dirty-checking",
+      "target": "external/rule:project-alpha-portal"
+    },
+    {
+      "source": "patterns/dual-source-merge",
+      "target": "patterns/persistence-layers"
+    },
+    {
+      "source": "patterns/dual-source-merge",
+      "target": "patterns/idb-write-through"
+    },
+    {
+      "source": "patterns/dual-source-merge",
+      "target": "external/rule:project-alpha-portal"
+    },
+    {
+      "source": "patterns/env-file-management",
+      "target": "patterns/cdn-vs-build-projects"
+    },
+    {
+      "source": "patterns/env-file-management",
+      "target": "external/memory:lessons"
+    },
+    {
+      "source": "patterns/firebase-hosting-checklist",
+      "target": "patterns/cdn-vs-build-projects"
+    },
+    {
+      "source": "patterns/firebase-hosting-checklist",
+      "target": "patterns/cloudflare-deploy-pipeline"
+    },
+    {
+      "source": "patterns/firebase-hosting-checklist",
+      "target": "external/rule:firebase"
+    },
+    {
+      "source": "patterns/hybrid-search",
+      "target": "patterns/content-classification"
+    },
+    {
+      "source": "patterns/hybrid-search",
+      "target": "patterns/composable-workflows"
+    },
+    {
+      "source": "patterns/idb-write-through",
+      "target": "patterns/persistence-layers"
+    },
+    {
+      "source": "patterns/idb-write-through",
+      "target": "external/memory:lessons"
+    },
+    {
+      "source": "patterns/idb-write-through",
+      "target": "external/rule:project-alpha-portal"
+    },
+    {
+      "source": "patterns/lock-files",
+      "target": "patterns/atomic-file-operations"
+    },
+    {
+      "source": "patterns/lock-files",
+      "target": "patterns/cache-integrity"
+    },
+    {
+      "source": "patterns/persistence-layers",
+      "target": "patterns/idb-write-through"
+    },
+    {
+      "source": "patterns/persistence-layers",
+      "target": "patterns/dirty-checking"
+    },
+    {
+      "source": "patterns/persistence-layers",
+      "target": "patterns/dual-source-merge"
+    },
+    {
+      "source": "patterns/persistence-layers",
+      "target": "external/rule:project-alpha-portal"
+    },
+    {
+      "source": "patterns/rate-limiting",
+      "target": "patterns/cloudflare-deploy-pipeline"
+    },
+    {
+      "source": "projects/_moc-projects",
+      "target": "projects/project-alpha/_moc-project-alpha"
+    },
+    {
+      "source": "projects/_moc-projects",
+      "target": "projects/project-delta-planner/_moc-project-delta-planner"
+    },
+    {
+      "source": "projects/_moc-projects",
+      "target": "projects/project-epsilon Platform/_moc-project-epsilon Platform"
+    },
+    {
+      "source": "projects/_moc-projects",
+      "target": "projects/project-epsilon/_moc-project-epsilon"
+    },
+    {
+      "source": "projects/_moc-projects",
+      "target": "projects/project-beta/_moc-project-beta"
+    },
+    {
+      "source": "projects/_moc-projects",
+      "target": "projects/project-theta/_moc-project-theta"
+    },
+    {
+      "source": "projects/_moc-projects",
+      "target": "projects/project-eta/_moc-project-eta"
+    },
+    {
+      "source": "projects/_moc-projects",
+      "target": "projects/brand-a/_moc-brand-a"
+    },
+    {
+      "source": "projects/_moc-projects",
+      "target": "projects/bobs-project-zeta/_moc-bobs-project-zeta"
+    },
+    {
+      "source": "projects/project-epsilon/_moc-project-epsilon",
+      "target": "projects/project-epsilon/epsilon-ai-concierge"
+    },
+    {
+      "source": "projects/project-epsilon/_moc-project-epsilon",
+      "target": "external/rule:project-epsilon"
+    },
+    {
+      "source": "projects/project-epsilon/_moc-project-epsilon",
+      "target": "runbooks/rb-deploy-project-epsilon"
+    },
+    {
+      "source": "projects/project-epsilon/_moc-project-epsilon",
+      "target": "projects/brand-a/brand-a-brand-fork"
+    },
+    {
+      "source": "projects/project-epsilon/epsilon-ai-concierge",
+      "target": "projects/project-epsilon/epsilon-git-relay"
+    },
+    {
+      "source": "projects/project-epsilon/epsilon-ai-concierge",
+      "target": "patterns/rate-limiting"
+    },
+    {
+      "source": "projects/project-epsilon/epsilon-git-relay",
+      "target": "external/rule:project-epsilon"
+    },
+    {
+      "source": "projects/project-epsilon/epsilon-git-relay",
+      "target": "projects/project-epsilon/epsilon-ai-concierge"
+    },
+    {
+      "source": "projects/project-epsilon/epsilon-git-relay",
+      "target": "runbooks/rb-deploy-project-epsilon"
+    },
+    {
+      "source": "projects/project-epsilon Platform/_moc-project-epsilon Platform",
+      "target": "projects/project-epsilon Platform/epsilon-platform-role-based-auth"
+    },
+    {
+      "source": "projects/project-epsilon Platform/_moc-project-epsilon Platform",
+      "target": "projects/project-epsilon Platform/epsilon-platform-supabase-connection"
+    },
+    {
+      "source": "projects/project-epsilon Platform/_moc-project-epsilon Platform",
+      "target": "projects/project-epsilon Platform/epsilon-platform-database-schema"
+    },
+    {
+      "source": "projects/project-epsilon Platform/_moc-project-epsilon Platform",
+      "target": "external/rule:project-epsilon Platform"
+    },
+    {
+      "source": "projects/project-epsilon Platform/_moc-project-epsilon Platform",
+      "target": "patterns/env-file-management"
+    },
+    {
+      "source": "projects/project-epsilon Platform/epsilon-platform-database-schema",
+      "target": "projects/project-epsilon Platform/epsilon-platform-supabase-connection"
+    },
+    {
+      "source": "projects/project-epsilon Platform/epsilon-platform-database-schema",
+      "target": "projects/project-epsilon Platform/epsilon-platform-role-based-auth"
+    },
+    {
+      "source": "projects/project-epsilon Platform/epsilon-platform-role-based-auth",
+      "target": "projects/project-epsilon Platform/epsilon-platform-supabase-connection"
+    },
+    {
+      "source": "projects/project-epsilon Platform/epsilon-platform-role-based-auth",
+      "target": "external/memory:lessons"
+    },
+    {
+      "source": "projects/project-epsilon Platform/epsilon-platform-supabase-connection",
+      "target": "patterns/env-file-management"
+    },
+    {
+      "source": "projects/project-epsilon Platform/epsilon-platform-supabase-connection",
+      "target": "projects/project-epsilon Platform/epsilon-platform-role-based-auth"
+    },
+    {
+      "source": "projects/project-epsilon Platform/epsilon-platform-supabase-connection",
+      "target": "projects/project-epsilon Platform/epsilon-platform-database-schema"
+    },
+    {
+      "source": "projects/bobs-project-zeta/_moc-bobs-project-zeta",
+      "target": "projects/bobs-project-zeta/bsp-api-integration"
+    },
+    {
+      "source": "projects/bobs-project-zeta/_moc-bobs-project-zeta",
+      "target": "patterns/rate-limiting"
+    },
+    {
+      "source": "projects/bobs-project-zeta/_moc-bobs-project-zeta",
+      "target": "patterns/cloudflare-deploy-pipeline"
+    },
+    {
+      "source": "projects/bobs-project-zeta/bsp-api-integration",
+      "target": "patterns/rate-limiting"
+    },
+    {
+      "source": "projects/bobs-project-zeta/bsp-api-integration",
+      "target": "patterns/cloudflare-deploy-pipeline"
+    },
+    {
+      "source": "projects/project-theta/_moc-project-theta",
+      "target": "projects/project-theta/project-theta-indexing"
+    },
+    {
+      "source": "projects/project-theta/_moc-project-theta",
+      "target": "projects/project-theta/project-theta-search"
+    },
+    {
+      "source": "projects/project-theta/_moc-project-theta",
+      "target": "projects/project-theta/project-theta-techs"
+    },
+    {
+      "source": "projects/project-theta/_moc-project-theta",
+      "target": "projects/project-theta/project-theta-data-model"
+    },
+    {
+      "source": "projects/project-theta/_moc-project-theta",
+      "target": "projects/project-theta/project-theta-project-health"
+    },
+    {
+      "source": "projects/project-theta/_moc-project-theta",
+      "target": "external/rule:project-theta"
+    },
+    {
+      "source": "projects/project-theta/_moc-project-theta",
+      "target": "patterns/atomic-file-operations"
+    },
+    {
+      "source": "projects/project-theta/_moc-project-theta",
+      "target": "patterns/lock-files"
+    },
+    {
+      "source": "projects/project-theta/_moc-project-theta",
+      "target": "patterns/content-classification"
+    },
+    {
+      "source": "projects/project-theta/_moc-project-theta",
+      "target": "patterns/hybrid-search"
+    },
+    {
+      "source": "projects/project-theta/_moc-project-theta",
+      "target": "patterns/composable-workflows"
+    },
+    {
+      "source": "projects/project-theta/_moc-project-theta",
+      "target": "patterns/cache-integrity"
+    },
+    {
+      "source": "projects/project-theta/_moc-project-theta",
+      "target": "patterns/data-corruption-recovery"
+    },
+    {
+      "source": "projects/project-theta/project-theta-data-model",
+      "target": "patterns/cache-integrity"
+    },
+    {
+      "source": "projects/project-theta/project-theta-data-model",
+      "target": "patterns/atomic-file-operations"
+    },
+    {
+      "source": "projects/project-theta/project-theta-data-model",
+      "target": "patterns/lock-files"
+    },
+    {
+      "source": "projects/project-theta/project-theta-data-model",
+      "target": "projects/project-theta/project-theta-indexing"
+    },
+    {
+      "source": "projects/project-theta/project-theta-indexing",
+      "target": "patterns/lock-files"
+    },
+    {
+      "source": "projects/project-theta/project-theta-indexing",
+      "target": "patterns/atomic-file-operations"
+    },
+    {
+      "source": "projects/project-theta/project-theta-indexing",
+      "target": "projects/project-theta/project-theta-data-model"
+    },
+    {
+      "source": "projects/project-theta/project-theta-indexing",
+      "target": "projects/project-theta/project-theta-search"
+    },
+    {
+      "source": "projects/project-theta/project-theta-indexing",
+      "target": "patterns/cache-integrity"
+    },
+    {
+      "source": "projects/project-theta/project-theta-indexing",
+      "target": "patterns/data-corruption-recovery"
+    },
+    {
+      "source": "projects/project-theta/project-theta-project-health",
+      "target": "patterns/composable-workflows"
+    },
+    {
+      "source": "projects/project-theta/project-theta-project-health",
+      "target": "workflow/verification-before-done"
+    },
+    {
+      "source": "projects/project-theta/project-theta-project-health",
+      "target": "workflow/anti-patterns"
+    },
+    {
+      "source": "projects/project-theta/project-theta-search",
+      "target": "patterns/hybrid-search"
+    },
+    {
+      "source": "projects/project-theta/project-theta-search",
+      "target": "projects/project-theta/project-theta-indexing"
+    },
+    {
+      "source": "projects/project-theta/project-theta-search",
+      "target": "projects/project-theta/project-theta-data-model"
+    },
+    {
+      "source": "projects/project-theta/project-theta-techs",
+      "target": "patterns/composable-workflows"
+    },
+    {
+      "source": "projects/project-theta/project-theta-techs",
+      "target": "workflow/registry-pattern"
+    },
+    {
+      "source": "projects/project-theta/project-theta-techs",
+      "target": "projects/project-theta/project-theta-indexing"
+    },
+    {
+      "source": "projects/brand-a/_moc-brand-a",
+      "target": "projects/brand-a/brand-a-brand-fork"
+    },
+    {
+      "source": "projects/brand-a/_moc-brand-a",
+      "target": "patterns/cdn-vs-build-projects"
+    },
+    {
+      "source": "projects/brand-a/_moc-brand-a",
+      "target": "projects/project-epsilon/epsilon-git-relay"
+    },
+    {
+      "source": "projects/brand-a/brand-a-brand-fork",
+      "target": "projects/project-epsilon/_moc-project-epsilon"
+    },
+    {
+      "source": "projects/project-beta/_moc-project-beta",
+      "target": "projects/project-beta/mv-firebase-hosting"
+    },
+    {
+      "source": "projects/project-beta/_moc-project-beta",
+      "target": "external/rule:project-beta"
+    },
+    {
+      "source": "projects/project-beta/_moc-project-beta",
+      "target": "patterns/firebase-hosting-checklist"
+    },
+    {
+      "source": "projects/project-beta/_moc-project-beta",
+      "target": "patterns/cdn-vs-build-projects"
+    },
+    {
+      "source": "projects/project-beta/mv-firebase-hosting",
+      "target": "patterns/firebase-hosting-checklist"
+    },
+    {
+      "source": "projects/project-beta/mv-firebase-hosting",
+      "target": "workflow/anti-patterns"
+    },
+    {
+      "source": "projects/project-alpha/_moc-project-alpha",
+      "target": "projects/project-alpha/storage-architecture"
+    },
+    {
+      "source": "projects/project-alpha/_moc-project-alpha",
+      "target": "projects/project-alpha/sidebar-dual-render"
+    },
+    {
+      "source": "projects/project-alpha/_moc-project-alpha",
+      "target": "projects/project-alpha/smart-merge"
+    },
+    {
+      "source": "projects/project-alpha/_moc-project-alpha",
+      "target": "projects/project-alpha/detail-modal-fields"
+    },
+    {
+      "source": "projects/project-alpha/_moc-project-alpha",
+      "target": "external/rule:project-alpha-portal"
+    },
+    {
+      "source": "projects/project-alpha/_moc-project-alpha",
+      "target": "patterns/persistence-layers"
+    },
+    {
+      "source": "projects/project-alpha/_moc-project-alpha",
+      "target": "patterns/dirty-checking"
+    },
+    {
+      "source": "projects/project-alpha/detail-modal-fields",
+      "target": "patterns/dirty-checking"
+    },
+    {
+      "source": "projects/project-alpha/detail-modal-fields",
+      "target": "projects/project-alpha/smart-merge"
+    },
+    {
+      "source": "projects/project-alpha/detail-modal-fields",
+      "target": "projects/project-alpha/storage-architecture"
+    },
+    {
+      "source": "projects/project-alpha/sidebar-dual-render",
+      "target": "workflow/anti-patterns"
+    },
+    {
+      "source": "projects/project-alpha/sidebar-dual-render",
+      "target": "external/rule:project-alpha-portal"
+    },
+    {
+      "source": "projects/project-alpha/smart-merge",
+      "target": "projects/project-alpha/storage-architecture"
+    },
+    {
+      "source": "projects/project-alpha/smart-merge",
+      "target": "projects/project-alpha/detail-modal-fields"
+    },
+    {
+      "source": "projects/project-alpha/smart-merge",
+      "target": "patterns/persistence-layers"
+    },
+    {
+      "source": "projects/project-alpha/storage-architecture",
+      "target": "patterns/idb-write-through"
+    },
+    {
+      "source": "projects/project-alpha/storage-architecture",
+      "target": "patterns/dual-source-merge"
+    },
+    {
+      "source": "projects/project-alpha/storage-architecture",
+      "target": "patterns/dirty-checking"
+    },
+    {
+      "source": "projects/project-alpha/storage-architecture",
+      "target": "patterns/persistence-layers"
+    },
+    {
+      "source": "projects/project-alpha/storage-architecture",
+      "target": "projects/project-alpha/smart-merge"
+    },
+    {
+      "source": "projects/project-alpha/storage-architecture",
+      "target": "projects/project-alpha/detail-modal-fields"
+    },
+    {
+      "source": "projects/project-alpha/storage-architecture",
+      "target": "external/rule:project-alpha-portal"
+    },
+    {
+      "source": "projects/project-delta-planner/_moc-project-delta-planner",
+      "target": "projects/project-delta-planner/trp-personas-system"
+    },
+    {
+      "source": "projects/project-delta-planner/_moc-project-delta-planner",
+      "target": "projects/project-delta-planner/trp-firebase-hybrid"
+    },
+    {
+      "source": "projects/project-delta-planner/_moc-project-delta-planner",
+      "target": "projects/project-delta-planner/trp-ai-integration"
+    },
+    {
+      "source": "projects/project-delta-planner/_moc-project-delta-planner",
+      "target": "external/rule:project-delta-planner"
+    },
+    {
+      "source": "projects/project-delta-planner/_moc-project-delta-planner",
+      "target": "patterns/firebase-hosting-checklist"
+    },
+    {
+      "source": "projects/project-delta-planner/_moc-project-delta-planner",
+      "target": "workflow/registry-pattern"
+    },
+    {
+      "source": "projects/project-delta-planner/trp-ai-integration",
+      "target": "projects/project-delta-planner/trp-personas-system"
+    },
+    {
+      "source": "projects/project-delta-planner/trp-ai-integration",
+      "target": "workflow/registry-pattern"
+    },
+    {
+      "source": "projects/project-delta-planner/trp-firebase-hybrid",
+      "target": "external/rule:firebase"
+    },
+    {
+      "source": "projects/project-delta-planner/trp-firebase-hybrid",
+      "target": "patterns/firebase-hosting-checklist"
+    },
+    {
+      "source": "projects/project-delta-planner/trp-personas-system",
+      "target": "workflow/registry-pattern"
+    },
+    {
+      "source": "projects/project-delta-planner/trp-personas-system",
+      "target": "projects/project-delta-planner/trp-ai-integration"
+    },
+    {
+      "source": "projects/project-eta/_moc-project-eta",
+      "target": "projects/project-eta/project-eta-app-shell"
+    },
+    {
+      "source": "projects/project-eta/_moc-project-eta",
+      "target": "projects/project-eta/project-eta-data-layer"
+    },
+    {
+      "source": "projects/project-eta/_moc-project-eta",
+      "target": "projects/project-eta/project-eta-compliance-engine"
+    },
+    {
+      "source": "projects/project-eta/_moc-project-eta",
+      "target": "external/rule:project-eta"
+    },
+    {
+      "source": "projects/project-eta/_moc-project-eta",
+      "target": "patterns/cloudflare-deploy-pipeline"
+    },
+    {
+      "source": "projects/project-eta/_moc-project-eta",
+      "target": "workflow/registry-pattern"
+    },
+    {
+      "source": "projects/project-eta/project-eta-app-shell",
+      "target": "projects/project-eta/project-eta-data-layer"
+    },
+    {
+      "source": "projects/project-eta/project-eta-app-shell",
+      "target": "projects/project-eta/project-eta-compliance-engine"
+    },
+    {
+      "source": "projects/project-eta/project-eta-compliance-engine",
+      "target": "projects/project-eta/project-eta-data-layer"
+    },
+    {
+      "source": "projects/project-eta/project-eta-compliance-engine",
+      "target": "projects/project-eta/project-eta-app-shell"
+    },
+    {
+      "source": "projects/project-eta/project-eta-data-layer",
+      "target": "projects/project-eta/project-eta-app-shell"
+    },
+    {
+      "source": "projects/project-eta/project-eta-data-layer",
+      "target": "projects/project-eta/project-eta-compliance-engine"
+    },
+    {
+      "source": "projects/project-eta/project-eta-data-layer",
+      "target": "workflow/registry-pattern"
+    },
+    {
+      "source": "runbooks/_moc-runbooks",
+      "target": "runbooks/rb-deploy-project-epsilon"
+    },
+    {
+      "source": "runbooks/_moc-runbooks",
+      "target": "runbooks/rb-deploy-firebase"
+    },
+    {
+      "source": "runbooks/_moc-runbooks",
+      "target": "runbooks/rb-deploy-cloudflare-workers"
+    },
+    {
+      "source": "runbooks/_moc-runbooks",
+      "target": "runbooks/rb-project-intake"
+    },
+    {
+      "source": "runbooks/_moc-runbooks",
+      "target": "runbooks/rb-new-project-setup"
+    },
+    {
+      "source": "runbooks/_moc-runbooks",
+      "target": "runbooks/rb-fresh-clone"
+    },
+    {
+      "source": "runbooks/_moc-runbooks",
+      "target": "runbooks/rb-drive-sync-recovery"
+    },
+    {
+      "source": "runbooks/_moc-runbooks",
+      "target": "runbooks/rb-project-theta-reindex"
+    },
+    {
+      "source": "runbooks/_moc-runbooks",
+      "target": "runbooks/rb-add-site-to-status"
+    },
+    {
+      "source": "runbooks/_moc-runbooks",
+      "target": "runbooks/rb-new-firebase-project"
+    },
+    {
+      "source": "runbooks/rb-add-site-to-status",
+      "target": "workflow/registry-pattern"
+    },
+    {
+      "source": "runbooks/rb-add-site-to-status",
+      "target": "external/skill:status"
+    },
+    {
+      "source": "runbooks/rb-project-theta-reindex",
+      "target": "projects/project-theta/project-theta-indexing"
+    },
+    {
+      "source": "runbooks/rb-project-theta-reindex",
+      "target": "patterns/data-corruption-recovery"
+    },
+    {
+      "source": "runbooks/rb-project-theta-reindex",
+      "target": "projects/project-theta/project-theta-data-model"
+    },
+    {
+      "source": "runbooks/rb-deploy-project-epsilon",
+      "target": "external/rule:project-epsilon"
+    },
+    {
+      "source": "runbooks/rb-deploy-cloudflare-workers",
+      "target": "patterns/cloudflare-deploy-pipeline"
+    },
+    {
+      "source": "runbooks/rb-deploy-cloudflare-workers",
+      "target": "patterns/rate-limiting"
+    },
+    {
+      "source": "runbooks/rb-deploy-firebase",
+      "target": "patterns/firebase-hosting-checklist"
+    },
+    {
+      "source": "runbooks/rb-deploy-firebase",
+      "target": "projects/project-beta/mv-firebase-hosting"
+    },
+    {
+      "source": "runbooks/rb-drive-sync-recovery",
+      "target": "patterns/cdn-vs-build-projects"
+    },
+    {
+      "source": "runbooks/rb-drive-sync-recovery",
+      "target": "decisions/adr-workspace-tiers"
+    },
+    {
+      "source": "runbooks/rb-fresh-clone",
+      "target": "patterns/env-file-management"
+    },
+    {
+      "source": "runbooks/rb-fresh-clone",
+      "target": "patterns/cdn-vs-build-projects"
+    },
+    {
+      "source": "runbooks/rb-new-firebase-project",
+      "target": "patterns/firebase-hosting-checklist"
+    },
+    {
+      "source": "runbooks/rb-new-firebase-project",
+      "target": "external/rule:firebase"
+    },
+    {
+      "source": "runbooks/rb-new-firebase-project",
+      "target": "decisions/adr-firebase-spark"
+    },
+    {
+      "source": "runbooks/rb-new-project-setup",
+      "target": "runbooks/rb-project-intake"
+    },
+    {
+      "source": "runbooks/rb-new-project-setup",
+      "target": "decisions/adr-workspace-tiers"
+    },
+    {
+      "source": "runbooks/rb-new-project-setup",
+      "target": "patterns/cdn-vs-build-projects"
+    },
+    {
+      "source": "runbooks/rb-new-project-setup",
+      "target": "workflow/registry-pattern"
+    },
+    {
+      "source": "runbooks/rb-project-intake",
+      "target": "decisions/adr-workspace-tiers"
+    },
+    {
+      "source": "runbooks/rb-project-intake",
+      "target": "patterns/persistence-layers"
+    },
+    {
+      "source": "runbooks/rb-project-intake",
+      "target": "patterns/rate-limiting"
+    },
+    {
+      "source": "runbooks/rb-project-intake",
+      "target": "decisions/adr-hosting-split"
+    },
+    {
+      "source": "runbooks/rb-project-intake",
+      "target": "workflow/skill-status"
+    },
+    {
+      "source": "runbooks/rb-project-intake",
+      "target": "runbooks/rb-new-project-setup"
+    },
+    {
+      "source": "runbooks/rb-project-intake",
+      "target": "workflow/morning-workflow"
+    },
+    {
+      "source": "runbooks/rb-project-intake",
+      "target": "workflow/registry-pattern"
+    },
+    {
+      "source": "runbooks/rb-project-intake",
+      "target": "workflow/self-improvement-loop"
+    },
+    {
+      "source": "workflow/_moc-workflow",
+      "target": "workflow/morning-workflow"
+    },
+    {
+      "source": "workflow/_moc-workflow",
+      "target": "workflow/skill-primer"
+    },
+    {
+      "source": "workflow/_moc-workflow",
+      "target": "workflow/skill-status"
+    },
+    {
+      "source": "workflow/_moc-workflow",
+      "target": "workflow/skill-debt"
+    },
+    {
+      "source": "workflow/_moc-workflow",
+      "target": "workflow/skill-project-theta"
+    },
+    {
+      "source": "workflow/_moc-workflow",
+      "target": "workflow/skill-spec"
+    },
+    {
+      "source": "workflow/_moc-workflow",
+      "target": "workflow/skill-reflect"
+    },
+    {
+      "source": "workflow/_moc-workflow",
+      "target": "workflow/plan-mode"
+    },
+    {
+      "source": "workflow/_moc-workflow",
+      "target": "workflow/subagent-strategy"
+    },
+    {
+      "source": "workflow/_moc-workflow",
+      "target": "workflow/verification-before-done"
+    },
+    {
+      "source": "workflow/_moc-workflow",
+      "target": "workflow/self-improvement-loop"
+    },
+    {
+      "source": "workflow/_moc-workflow",
+      "target": "workflow/demand-elegance"
+    },
+    {
+      "source": "workflow/_moc-workflow",
+      "target": "workflow/autonomous-bug-fixing"
+    },
+    {
+      "source": "workflow/_moc-workflow",
+      "target": "workflow/anti-patterns"
+    },
+    {
+      "source": "workflow/_moc-workflow",
+      "target": "workflow/registry-pattern"
+    },
+    {
+      "source": "workflow/anti-patterns",
+      "target": "workflow/self-improvement-loop"
+    },
+    {
+      "source": "workflow/anti-patterns",
+      "target": "patterns/dirty-checking"
+    },
+    {
+      "source": "workflow/anti-patterns",
+      "target": "patterns/persistence-layers"
+    },
+    {
+      "source": "workflow/autonomous-bug-fixing",
+      "target": "workflow/verification-before-done"
+    },
+    {
+      "source": "workflow/autonomous-bug-fixing",
+      "target": "workflow/self-improvement-loop"
+    },
+    {
+      "source": "workflow/autonomous-bug-fixing",
+      "target": "patterns/data-corruption-recovery"
+    },
+    {
+      "source": "workflow/demand-elegance",
+      "target": "workflow/plan-mode"
+    },
+    {
+      "source": "workflow/demand-elegance",
+      "target": "workflow/anti-patterns"
+    },
+    {
+      "source": "workflow/morning-workflow",
+      "target": "projects/_moc-projects"
+    },
+    {
+      "source": "workflow/morning-workflow",
+      "target": "decisions/_moc-decisions"
+    },
+    {
+      "source": "workflow/morning-workflow",
+      "target": "runbooks/_moc-runbooks"
+    },
+    {
+      "source": "workflow/morning-workflow",
+      "target": "workflow/skill-primer"
+    },
+    {
+      "source": "workflow/morning-workflow",
+      "target": "workflow/skill-status"
+    },
+    {
+      "source": "workflow/morning-workflow",
+      "target": "workflow/skill-debt"
+    },
+    {
+      "source": "workflow/morning-workflow",
+      "target": "workflow/skill-project-theta"
+    },
+    {
+      "source": "workflow/morning-workflow",
+      "target": "workflow/skill-spec"
+    },
+    {
+      "source": "workflow/morning-workflow",
+      "target": "workflow/skill-reflect"
+    },
+    {
+      "source": "workflow/morning-workflow",
+      "target": "workflow/verification-before-done"
+    },
+    {
+      "source": "workflow/morning-workflow",
+      "target": "workflow/self-improvement-loop"
+    },
+    {
+      "source": "workflow/plan-mode",
+      "target": "workflow/verification-before-done"
+    },
+    {
+      "source": "workflow/plan-mode",
+      "target": "workflow/subagent-strategy"
+    },
+    {
+      "source": "workflow/plan-mode",
+      "target": "workflow/demand-elegance"
+    },
+    {
+      "source": "workflow/registry-pattern",
+      "target": "patterns/composable-workflows"
+    },
+    {
+      "source": "workflow/registry-pattern",
+      "target": "patterns/content-classification"
+    },
+    {
+      "source": "workflow/registry-pattern",
+      "target": "external/skill:status"
+    },
+    {
+      "source": "workflow/self-improvement-loop",
+      "target": "external/memory:lessons"
+    },
+    {
+      "source": "workflow/self-improvement-loop",
+      "target": "workflow/anti-patterns"
+    },
+    {
+      "source": "workflow/self-improvement-loop",
+      "target": "workflow/verification-before-done"
+    },
+    {
+      "source": "workflow/skill-project-theta",
+      "target": "workflow/morning-workflow"
+    },
+    {
+      "source": "workflow/skill-project-theta",
+      "target": "workflow/skill-primer"
+    },
+    {
+      "source": "workflow/skill-project-theta",
+      "target": "projects/project-theta/project-theta-search"
+    },
+    {
+      "source": "workflow/skill-project-theta",
+      "target": "projects/project-theta/project-theta-techs"
+    },
+    {
+      "source": "workflow/skill-project-theta",
+      "target": "projects/project-theta/_moc-project-theta"
+    },
+    {
+      "source": "workflow/skill-debt",
+      "target": "workflow/morning-workflow"
+    },
+    {
+      "source": "workflow/skill-debt",
+      "target": "projects/project-theta/project-theta-project-health"
+    },
+    {
+      "source": "workflow/skill-debt",
+      "target": "workflow/skill-primer"
+    },
+    {
+      "source": "workflow/skill-debt",
+      "target": "workflow/anti-patterns"
+    },
+    {
+      "source": "workflow/skill-primer",
+      "target": "workflow/morning-workflow"
+    },
+    {
+      "source": "workflow/skill-primer",
+      "target": "workflow/skill-status"
+    },
+    {
+      "source": "workflow/skill-primer",
+      "target": "workflow/skill-project-theta"
+    },
+    {
+      "source": "workflow/skill-primer",
+      "target": "projects/_moc-projects"
+    },
+    {
+      "source": "workflow/skill-primer",
+      "target": "dependencies"
+    },
+    {
+      "source": "workflow/skill-reflect",
+      "target": "workflow/skill-primer"
+    },
+    {
+      "source": "workflow/skill-reflect",
+      "target": "workflow/skill-spec"
+    },
+    {
+      "source": "workflow/skill-reflect",
+      "target": "workflow/morning-workflow"
+    },
+    {
+      "source": "workflow/skill-reflect",
+      "target": "workflow/self-improvement-loop"
+    },
+    {
+      "source": "workflow/skill-spec",
+      "target": "workflow/skill-primer"
+    },
+    {
+      "source": "workflow/skill-spec",
+      "target": "workflow/skill-reflect"
+    },
+    {
+      "source": "workflow/skill-spec",
+      "target": "workflow/morning-workflow"
+    },
+    {
+      "source": "workflow/skill-status",
+      "target": "workflow/registry-pattern"
+    },
+    {
+      "source": "workflow/skill-status",
+      "target": "workflow/morning-workflow"
+    },
+    {
+      "source": "workflow/skill-status",
+      "target": "workflow/skill-primer"
+    },
+    {
+      "source": "workflow/skill-status",
+      "target": "runbooks/rb-add-site-to-status"
+    },
+    {
+      "source": "workflow/skill-status",
+      "target": "external/skill:status"
+    },
+    {
+      "source": "workflow/subagent-strategy",
+      "target": "workflow/plan-mode"
+    },
+    {
+      "source": "workflow/subagent-strategy",
+      "target": "patterns/composable-workflows"
+    },
+    {
+      "source": "workflow/verification-before-done",
+      "target": "workflow/plan-mode"
+    },
+    {
+      "source": "workflow/verification-before-done",
+      "target": "workflow/autonomous-bug-fixing"
+    },
+    {
+      "source": "workflow/verification-before-done",
+      "target": "workflow/self-improvement-loop"
+    }
+  ]
+}

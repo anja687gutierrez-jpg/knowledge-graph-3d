@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Topologies of Thoughts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: #000000;
+    color: #e0e0e0;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    letter-spacing: -0.02em;
+  }
+
+  #graph-container { width: 100%; height: 100%; }
+
+  /* --- Glassmorphism base --- */
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  /* --- Mono labels --- */
+  .mono {
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* --- Top Left: Title + Stats --- */
+  #title-panel {
+    position: fixed;
+    top: 24px;
+    left: 28px;
+    z-index: 10;
+    pointer-events: none;
+  }
+  #title-panel h1 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 0 0 30px rgba(255,255,255,0.15);
+  }
+  #title-panel .stats {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 6px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* --- Top Right: Topology Buttons --- */
+  #topology-panel {
+    position: fixed;
+    top: 24px;
+    right: 28px;
+    z-index: 10;
+    display: flex;
+    gap: 2px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .topo-btn {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.4);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+    backdrop-filter: blur(12px);
+  }
+  .topo-btn:hover {
+    color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.06);
+  }
+  .topo-btn.active {
+    color: #00ffcc;
+    background: rgba(0,255,204,0.06);
+    border-color: rgba(0,255,204,0.2);
+    text-shadow: 0 0 12px rgba(0,255,204,0.4);
+  }
+
+  /* --- Top Center: Search --- */
+  #search-panel {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+  #search-input {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.9);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 10px 18px;
+    width: 260px;
+    outline: none;
+    transition: all 0.4s ease;
+    border-radius: 6px;
+  }
+  #search-input::placeholder { color: rgba(255,255,255,0.2); }
+  #search-input:focus {
+    border-color: rgba(0,255,204,0.4);
+    box-shadow: 0 0 0 2px rgba(0,255,204,0.1);
+    background: rgba(255,255,255,0.05);
+  }
+
+  /* --- Left: Domain Filters --- */
+  #domain-panel {
+    position: fixed;
+    top: 90px;
+    left: 28px;
+    z-index: 10;
+    padding: 12px 14px;
+    border-radius: 10px;
+  }
+  .domain-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: rgba(255,255,255,0.25);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  .domain-filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 0;
+    cursor: pointer;
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    transition: all 0.3s ease;
+    user-select: none;
+  }
+  .domain-filter:hover { color: rgba(255,255,255,0.7); }
+  .domain-filter.active { color: rgba(255,255,255,0.9); }
+  .domain-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+  }
+  .domain-filter:not(.active) .domain-dot { opacity: 0.2; transform: scale(0.7); }
+  .domain-filter.active .domain-dot {
+    box-shadow: 0 0 8px currentColor;
+  }
+  .domain-count {
+    font-family: 'DM Mono', monospace;
+    color: rgba(255,255,255,0.15);
+    font-size: 10px;
+    margin-left: auto;
+    min-width: 20px;
+    text-align: right;
+  }
+
+  /* --- Right: Detail Panel --- */
+  #detail-panel {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 370px;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(24px);
+    border-left: 1px solid rgba(255,255,255,0.06);
+    z-index: 20;
+    padding: 32px 24px;
+    overflow-y: auto;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  #detail-panel.open { right: 0; }
+  #detail-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.3);
+    font-size: 20px;
+    cursor: pointer;
+    font-family: 'Manrope', sans-serif;
+    transition: color 0.3s;
+  }
+  #detail-close:hover { color: #fff; }
+  #detail-panel h2 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    word-break: break-word;
+    letter-spacing: -0.02em;
+  }
+  #detail-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+    opacity: 0.6;
+  }
+  #detail-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+  #detail-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 24px;
+    line-height: 2;
+  }
+  #detail-connections h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .conn-item {
+    font-size: 12px;
+    padding: 6px 0;
+    color: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .conn-item:hover { color: #00ffcc; padding-left: 6px; }
+  .conn-dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  /* --- Tooltip --- */
+  #tooltip {
+    position: fixed;
+    pointer-events: none;
+    z-index: 30;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 12px 16px;
+    font-size: 11px;
+    max-width: 280px;
+    display: none;
+    border-radius: 8px;
+    line-height: 1.5;
+  }
+  #tooltip .tt-name {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    margin-bottom: 2px;
+    font-size: 12px;
+  }
+  #tooltip .tt-domain {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+    opacity: 0.6;
+  }
+  #tooltip .tt-desc { color: rgba(255,255,255,0.5); font-size: 11px; }
+  #tooltip .tt-links {
+    font-family: 'DM Mono', monospace;
+    color: rgba(255,255,255,0.25);
+    font-size: 9px;
+    margin-top: 6px;
+  }
+
+  /* --- Glow animation --- */
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1.0; }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(0,255,204,0.2); }
+</style>
+</head>
+<body>
+
+<div id="graph-container"></div>
+
+<div id="title-panel">
+  <h1>Topologies of Thoughts</h1>
+  <div class="stats" id="stats-text">Initializing...</div>
+</div>
+
+<div id="search-panel">
+  <input type="text" id="search-input" placeholder="Search nodes...">
+</div>
+
+<div id="topology-panel">
+  <button class="topo-btn active" data-mode="centralized">Centralized</button>
+  <button class="topo-btn" data-mode="decentralized">Decentralized</button>
+  <button class="topo-btn" data-mode="distributed">Distributed</button>
+</div>
+
+<div id="domain-panel" class="glass">
+  <div class="domain-label">Domains</div>
+</div>
+
+<div id="detail-panel">
+  <button id="detail-close">&times;</button>
+  <h2 id="detail-name"></h2>
+  <div id="detail-type"></div>
+  <div id="detail-desc"></div>
+  <div id="detail-meta"></div>
+  <div id="detail-connections">
+    <h3>Connections</h3>
+    <div id="detail-conn-list"></div>
+  </div>
+</div>
+
+<div id="tooltip">
+  <div class="tt-name"></div>
+  <div class="tt-domain"></div>
+  <div class="tt-desc"></div>
+  <div class="tt-links"></div>
+</div>
+
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<script src="https://unpkg.com/three-spritetext@1.8.2/dist/three-spritetext.min.js"></script>
+<script src="https://unpkg.com/3d-force-graph@1.73.3/dist/3d-force-graph.min.js"></script>
+
+<script>
+const DOMAIN_COLORS = {
+  patterns:  '#00ffcc',
+  business:  '#ff6b9d',
+  workflow:  '#ffd93d',
+  projects:  '#6c5ce7',
+  decisions: '#ff8a5c',
+  runbooks:  '#a8e6cf',
+  meta:      '#ffffff',
+  external:  '#444444',
+  phantom:   '#222222',
+};
+
+let graphData = null;
+let graph = null;
+let selectedNode = null;
+let hoveredNode = null;
+let searchTerm = '';
+let activeDomains = new Set();
+let currentMode = 'centralized';
+let neighbors = {};
+let autoRotate = true;
+let rotationAngle = 0;
+
+// --- Load Data ---
+fetch('graph-data.json')
+  .then(r => r.json())
+  .then(data => {
+    graphData = data;
+    activeDomains = new Set(data.metadata.domains);
+
+    data.nodes.forEach(n => { neighbors[n.id] = new Set(); });
+    data.links.forEach(l => {
+      if (!neighbors[l.source]) neighbors[l.source] = new Set();
+      if (!neighbors[l.target]) neighbors[l.target] = new Set();
+      neighbors[l.source].add(l.target);
+      neighbors[l.target].add(l.source);
+    });
+
+    init();
+  })
+  .catch(err => {
+    document.getElementById('stats-text').textContent = 'Error: ' + err.message;
+    console.error(err);
+  });
+
+function init() {
+  document.getElementById('stats-text').textContent =
+    `${graphData.metadata.nodeCount} nodes \u00b7 ${graphData.metadata.linkCount} links \u00b7 ${graphData.metadata.domains.length} domains`;
+
+  buildDomainFilters();
+  buildGraph();
+  setupSearch();
+  setupTopologyButtons();
+  setupDetailPanel();
+  startAutoRotation();
+}
+
+// --- Domain Filters ---
+function buildDomainFilters() {
+  const panel = document.getElementById('domain-panel');
+  const counts = {};
+  graphData.nodes.forEach(n => { counts[n.domain] = (counts[n.domain] || 0) + 1; });
+
+  const label = panel.querySelector('.domain-label');
+  graphData.metadata.domains.forEach(d => {
+    const el = document.createElement('div');
+    el.className = 'domain-filter active';
+    el.dataset.domain = d;
+    el.innerHTML = `
+      <span class="domain-dot" style="background:${DOMAIN_COLORS[d] || '#555'}; color:${DOMAIN_COLORS[d] || '#555'}"></span>
+      <span>${d}</span>
+      <span class="domain-count">${counts[d] || 0}</span>
+    `;
+    el.addEventListener('click', () => {
+      if (activeDomains.has(d)) {
+        activeDomains.delete(d);
+        el.classList.remove('active');
+      } else {
+        activeDomains.add(d);
+        el.classList.add('active');
+      }
+      refreshGraph();
+    });
+    panel.appendChild(el);
+  });
+}
+
+// --- Graph ---
+function buildGraph() {
+  const container = document.getElementById('graph-container');
+
+  const gd = {
+    nodes: graphData.nodes.map(n => ({ ...n })),
+    links: graphData.links.map(l => ({ ...l })),
+  };
+
+  graph = ForceGraph3D({ controlType: 'orbit' })(container)
+    .backgroundColor('#000000')
+    .showNavInfo(false)
+
+    // --- Node rendering ---
+    .nodeVisibility(n => isVisible(n))
+    .nodeThreeObject(n => makeNodeObject(n))
+    .nodeThreeObjectExtend(false)
+
+    // --- Links ---
+    .linkVisibility(l => {
+      const s = typeof l.source === 'object' ? l.source : null;
+      const t = typeof l.target === 'object' ? l.target : null;
+      return s && t && isVisible(s) && isVisible(t);
+    })
+    .linkColor(l => getLinkColor(l))
+    .linkWidth(l => getLinkWidth(l))
+    .linkOpacity(0.35)
+
+    // --- Particles flowing along links (the living network effect) ---
+    .linkDirectionalParticles(l => {
+      if (selectedNode) {
+        const sId = typeof l.source === 'object' ? l.source.id : l.source;
+        const tId = typeof l.target === 'object' ? l.target.id : l.target;
+        if (sId === selectedNode.id || tId === selectedNode.id) return 6;
+        return 0;
+      }
+      return 2;
+    })
+    .linkDirectionalParticleWidth(1.2)
+    .linkDirectionalParticleSpeed(0.004)
+    .linkDirectionalParticleColor(l => {
+      if (selectedNode) {
+        const sId = typeof l.source === 'object' ? l.source.id : l.source;
+        const tId = typeof l.target === 'object' ? l.target.id : l.target;
+        if (sId === selectedNode.id || tId === selectedNode.id) return '#00ffcc';
+      }
+      return 'rgba(255,255,255,0.3)';
+    })
+
+    // --- Interactions ---
+    .onNodeHover(handleHover)
+    .onNodeClick(handleClick)
+    .onBackgroundClick(handleBackgroundClick)
+
+    // --- Simulation ---
+    .warmupTicks(120)
+    .cooldownTicks(Infinity)
+    .d3AlphaDecay(0.008)
+    .d3VelocityDecay(0.3)
+
+    .graphData(gd);
+
+  // Apply initial topology
+  setTimeout(() => {
+    applyTopology('centralized');
+    setTimeout(() => graph.zoomToFit(1200, 100), 2500);
+  }, 200);
+}
+
+function makeNodeObject(n) {
+  const group = new THREE.Group();
+  const color = getNodeColor(n);
+  const colorHex = new THREE.Color(color);
+
+  if (n.type === 'hub') {
+    // Hub: large glowing sphere + pulsing outer ring + label
+    const core = new THREE.Mesh(
+      new THREE.SphereGeometry(5, 32, 32),
+      new THREE.MeshBasicMaterial({ color: '#ffffff', transparent: true, opacity: 1 })
+    );
+    group.add(core);
+
+    // Inner glow sphere
+    const glow = new THREE.Mesh(
+      new THREE.SphereGeometry(8, 32, 32),
+      new THREE.MeshBasicMaterial({ color: '#00ffcc', transparent: true, opacity: 0.08 })
+    );
+    group.add(glow);
+
+    // Outer ring
+    const ring = new THREE.Mesh(
+      new THREE.RingGeometry(10, 11.5, 64),
+      new THREE.MeshBasicMaterial({ color: '#00ffcc', transparent: true, opacity: 0.2, side: THREE.DoubleSide })
+    );
+    group.add(ring);
+
+    // Second ring (perpendicular)
+    const ring2 = ring.clone();
+    ring2.rotation.x = Math.PI / 2;
+    group.add(ring2);
+
+    // Label
+    const sprite = new SpriteText(n.name);
+    sprite.color = '#ffffff';
+    sprite.textHeight = 4;
+    sprite.fontFace = 'Manrope, sans-serif';
+    sprite.fontWeight = '700';
+    sprite.backgroundColor = 'rgba(0,0,0,0.6)';
+    sprite.padding = [2, 5];
+    sprite.borderRadius = 2;
+    sprite.position.y = -14;
+    group.add(sprite);
+
+    // Animate the rings
+    group.userData.animate = (t) => {
+      ring.rotation.z = t * 0.3;
+      ring2.rotation.z = -t * 0.2;
+      glow.material.opacity = 0.06 + Math.sin(t * 2) * 0.04;
+    };
+
+  } else if (n.type === 'moc') {
+    // MOC: medium sphere with subtle glow + label
+    const size = 2.5 + (n.inDegree || 0) * 0.15;
+    const core = new THREE.Mesh(
+      new THREE.SphereGeometry(size, 20, 20),
+      new THREE.MeshBasicMaterial({ color: colorHex, transparent: true, opacity: 0.9 })
+    );
+    group.add(core);
+
+    // Glow halo
+    const halo = new THREE.Mesh(
+      new THREE.SphereGeometry(size * 1.6, 16, 16),
+      new THREE.MeshBasicMaterial({ color: colorHex, transparent: true, opacity: 0.06 })
+    );
+    group.add(halo);
+
+    // Label
+    const sprite = new SpriteText(n.name);
+    sprite.color = color;
+    sprite.textHeight = 2.2;
+    sprite.fontFace = 'Manrope, sans-serif';
+    sprite.fontWeight = '600';
+    sprite.backgroundColor = 'rgba(0,0,0,0.55)';
+    sprite.padding = [1, 4];
+    sprite.borderRadius = 1;
+    sprite.position.y = -(size + 4);
+    group.add(sprite);
+
+  } else if (n.type === 'meta') {
+    // Meta: white sphere + label
+    const core = new THREE.Mesh(
+      new THREE.SphereGeometry(2, 16, 16),
+      new THREE.MeshBasicMaterial({ color: '#ffffff', transparent: true, opacity: 0.8 })
+    );
+    group.add(core);
+
+    const sprite = new SpriteText(n.name);
+    sprite.color = '#ffffff';
+    sprite.textHeight = 2;
+    sprite.fontFace = 'DM Mono, monospace';
+    sprite.fontWeight = '400';
+    sprite.backgroundColor = 'rgba(0,0,0,0.5)';
+    sprite.padding = [1, 3];
+    sprite.position.y = -5;
+    group.add(sprite);
+
+  } else if (n.type === 'external' || n.type === 'phantom') {
+    // External/Phantom: tiny dim sphere
+    const core = new THREE.Mesh(
+      new THREE.SphereGeometry(0.8, 8, 8),
+      new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.3 })
+    );
+    group.add(core);
+
+  } else {
+    // Leaf nodes: small colored sphere, size by inDegree
+    const size = 1 + Math.min((n.inDegree || 0) * 0.2, 1.5);
+    const core = new THREE.Mesh(
+      new THREE.SphereGeometry(size, 12, 12),
+      new THREE.MeshBasicMaterial({ color: colorHex, transparent: true, opacity: 0.85 })
+    );
+    group.add(core);
+
+    // Subtle glow for high-connectivity leaves
+    if ((n.inDegree || 0) > 5) {
+      const halo = new THREE.Mesh(
+        new THREE.SphereGeometry(size * 1.8, 8, 8),
+        new THREE.MeshBasicMaterial({ color: colorHex, transparent: true, opacity: 0.04 })
+      );
+      group.add(halo);
+    }
+  }
+
+  return group;
+}
+
+function getNodeColor(n) {
+  if (n.type === 'phantom') return '#222222';
+  if (n.type === 'external') return '#444444';
+  return DOMAIN_COLORS[n.domain] || '#555555';
+}
+
+function getLinkColor(l) {
+  const srcId = typeof l.source === 'object' ? l.source.id : l.source;
+  const tgtId = typeof l.target === 'object' ? l.target.id : l.target;
+  if (selectedNode) {
+    if (srcId === selectedNode.id || tgtId === selectedNode.id) return '#00ffcc';
+    return 'rgba(255,255,255,0.02)';
+  }
+  return 'rgba(255,255,255,0.08)';
+}
+
+function getLinkWidth(l) {
+  const srcId = typeof l.source === 'object' ? l.source.id : l.source;
+  const tgtId = typeof l.target === 'object' ? l.target.id : l.target;
+  if (selectedNode && (srcId === selectedNode.id || tgtId === selectedNode.id)) return 1.2;
+  return 0.15;
+}
+
+function isVisible(n) {
+  return activeDomains.has(n.domain);
+}
+
+function matchesSearch(n) {
+  if (!searchTerm) return true;
+  const q = searchTerm.toLowerCase();
+  return n.name.toLowerCase().includes(q) || n.id.toLowerCase().includes(q) ||
+    (n.description && n.description.toLowerCase().includes(q));
+}
+
+function refreshGraph() {
+  graph
+    .nodeVisibility(graph.nodeVisibility())
+    .linkVisibility(graph.linkVisibility())
+    .linkColor(graph.linkColor())
+    .linkWidth(graph.linkWidth())
+    .linkDirectionalParticles(graph.linkDirectionalParticles())
+    .linkDirectionalParticleColor(graph.linkDirectionalParticleColor());
+}
+
+// --- Auto Rotation (living feel) ---
+function startAutoRotation() {
+  const distance = 300;
+  let angle = 0;
+  let userInteracted = false;
+  let lastInteraction = 0;
+
+  // Pause auto-rotate briefly after user interacts
+  const container = document.getElementById('graph-container');
+  ['mousedown', 'touchstart', 'wheel'].forEach(evt => {
+    container.addEventListener(evt, () => {
+      userInteracted = true;
+      lastInteraction = Date.now();
+    });
+  });
+
+  function animate() {
+    const now = Date.now();
+    // Resume auto-rotate 4s after last interaction
+    if (userInteracted && now - lastInteraction > 4000) {
+      userInteracted = false;
+    }
+
+    if (!userInteracted && graph) {
+      angle += 0.0008;
+      graph.cameraPosition({
+        x: distance * Math.sin(angle),
+        z: distance * Math.cos(angle),
+      });
+    }
+
+    // Animate hub rings
+    if (graph) {
+      const gd = graph.graphData();
+      const t = now * 0.001;
+      gd.nodes.forEach(n => {
+        if (n.__threeObj && n.__threeObj.userData.animate) {
+          n.__threeObj.userData.animate(t);
+        }
+      });
+    }
+
+    requestAnimationFrame(animate);
+  }
+  animate();
+}
+
+// --- Topology Modes ---
+function applyTopology(mode) {
+  currentMode = mode;
+
+  graph.d3Force('radial', null);
+  graph.d3Force('cluster', null);
+
+  const chargeForce = graph.d3Force('charge');
+  const linkForce = graph.d3Force('link');
+
+  if (mode === 'centralized') {
+    if (chargeForce) chargeForce.strength(-35).distanceMax(250);
+    if (linkForce) {
+      linkForce.distance(l => {
+        const src = typeof l.source === 'object' ? l.source : {};
+        const tgt = typeof l.target === 'object' ? l.target : {};
+        if (src.type === 'hub' || tgt.type === 'hub') return 50;
+        if (src.type === 'moc' || tgt.type === 'moc') return 35;
+        return 22;
+      }).strength(0.9);
+    }
+    graph.d3Force('radial', makeRadialForce());
+
+  } else if (mode === 'decentralized') {
+    if (chargeForce) chargeForce.strength(-55).distanceMax(300);
+    if (linkForce) {
+      linkForce.distance(l => {
+        const src = typeof l.source === 'object' ? l.source : {};
+        const tgt = typeof l.target === 'object' ? l.target : {};
+        return src.domain === tgt.domain ? 18 : 55;
+      }).strength(l => {
+        const src = typeof l.source === 'object' ? l.source : {};
+        const tgt = typeof l.target === 'object' ? l.target : {};
+        return src.domain === tgt.domain ? 1.0 : 0.25;
+      });
+    }
+    graph.d3Force('cluster', makeClusterForce());
+
+  } else if (mode === 'distributed') {
+    if (chargeForce) chargeForce.strength(-100).distanceMax(400);
+    if (linkForce) linkForce.distance(28).strength(0.35);
+  }
+
+  graph.d3ReheatSimulation();
+}
+
+function makeRadialForce() {
+  let nodes;
+  function force(alpha) {
+    const hubNode = nodes.find(n => n.type === 'hub');
+    if (!hubNode) return;
+    const cx = hubNode.x || 0, cy = hubNode.y || 0, cz = hubNode.z || 0;
+    for (const n of nodes) {
+      if (n.type === 'hub') continue;
+      const dx = (n.x || 0) - cx;
+      const dy = (n.y || 0) - cy;
+      const dz = (n.z || 0) - cz;
+      const dist = Math.sqrt(dx * dx + dy * dy + dz * dz) || 1;
+      const targetR = n.type === 'moc' ? 70 : 140;
+      const k = (dist - targetR) / dist * alpha * 0.07;
+      n.vx -= dx * k;
+      n.vy -= dy * k;
+      n.vz -= dz * k;
+    }
+  }
+  force.initialize = function(n) { nodes = n; };
+  return force;
+}
+
+function makeClusterForce() {
+  let nodes;
+  const domainCentroids = {};
+  const domains = Object.keys(DOMAIN_COLORS);
+  domains.forEach((d, i) => {
+    const phi = (i / domains.length) * Math.PI * 2;
+    const theta = ((i % 3) / 3) * Math.PI - Math.PI / 2;
+    domainCentroids[d] = {
+      x: Math.cos(phi) * Math.cos(theta) * 110,
+      y: Math.sin(theta) * 80,
+      z: Math.sin(phi) * Math.cos(theta) * 110,
+    };
+  });
+
+  function force(alpha) {
+    for (const n of nodes) {
+      const target = domainCentroids[n.domain];
+      if (!target) continue;
+      const k = alpha * 0.035;
+      n.vx += (target.x - (n.x || 0)) * k;
+      n.vy += (target.y - (n.y || 0)) * k;
+      n.vz += (target.z - (n.z || 0)) * k;
+    }
+  }
+  force.initialize = function(n) { nodes = n; };
+  return force;
+}
+
+function setupTopologyButtons() {
+  document.querySelectorAll('.topo-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.topo-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyTopology(btn.dataset.mode);
+    });
+  });
+}
+
+// --- Search ---
+function setupSearch() {
+  const input = document.getElementById('search-input');
+  let debounceTimer;
+  input.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      searchTerm = input.value.trim();
+      refreshGraph();
+    }, 200);
+  });
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      input.value = '';
+      searchTerm = '';
+      refreshGraph();
+      input.blur();
+    }
+  });
+}
+
+// --- Hover ---
+function handleHover(node) {
+  hoveredNode = node;
+  const tooltip = document.getElementById('tooltip');
+  if (node && isVisible(node)) {
+    tooltip.style.display = 'block';
+    const c = DOMAIN_COLORS[node.domain] || '#fff';
+    tooltip.querySelector('.tt-name').textContent = node.name;
+    tooltip.querySelector('.tt-name').style.color = c;
+    tooltip.querySelector('.tt-domain').textContent = node.domain + ' \u00b7 ' + node.type;
+    tooltip.querySelector('.tt-domain').style.color = c;
+    tooltip.querySelector('.tt-desc').textContent = node.description || '';
+    tooltip.querySelector('.tt-links').textContent = `IN ${node.inDegree}  \u00b7  OUT ${node.outDegree}`;
+    document.body.style.cursor = 'pointer';
+  } else {
+    tooltip.style.display = 'none';
+    document.body.style.cursor = 'default';
+  }
+}
+
+document.addEventListener('mousemove', e => {
+  const tooltip = document.getElementById('tooltip');
+  if (tooltip.style.display === 'block') {
+    tooltip.style.left = (e.clientX + 16) + 'px';
+    tooltip.style.top = (e.clientY + 16) + 'px';
+  }
+});
+
+// --- Click ---
+function handleClick(node) {
+  if (!node || !isVisible(node)) return;
+  selectedNode = node;
+  showDetailPanel(node);
+  refreshGraph();
+
+  graph.cameraPosition(
+    { x: node.x + 100, y: node.y + 30, z: node.z + 100 },
+    { x: node.x, y: node.y, z: node.z },
+    1200
+  );
+}
+
+function handleBackgroundClick() {
+  selectedNode = null;
+  document.getElementById('detail-panel').classList.remove('open');
+  refreshGraph();
+}
+
+// --- Detail Panel ---
+function setupDetailPanel() {
+  document.getElementById('detail-close').addEventListener('click', () => {
+    selectedNode = null;
+    document.getElementById('detail-panel').classList.remove('open');
+    refreshGraph();
+  });
+}
+
+function showDetailPanel(node) {
+  const panel = document.getElementById('detail-panel');
+  const color = DOMAIN_COLORS[node.domain] || '#888';
+
+  document.getElementById('detail-name').textContent = node.name;
+  document.getElementById('detail-name').style.color = color;
+  document.getElementById('detail-type').textContent = `${node.domain} \u00b7 ${node.type}`;
+  document.getElementById('detail-type').style.color = color;
+  document.getElementById('detail-desc').textContent = node.description || 'No description';
+
+  let meta = '';
+  if (node.created) meta += `CREATED ${node.created}<br>`;
+  if (node.status) meta += `STATUS ${node.status}<br>`;
+  if (node.priority) meta += `PRIORITY ${node.priority}<br>`;
+  meta += `IN ${node.inDegree} \u00b7 OUT ${node.outDegree}`;
+  document.getElementById('detail-meta').innerHTML = meta;
+
+  const connList = document.getElementById('detail-conn-list');
+  const nodeNeighbors = neighbors[node.id] || new Set();
+  if (nodeNeighbors.size === 0) {
+    connList.innerHTML = '<div style="color:rgba(255,255,255,0.15);font-size:11px">No connections</div>';
+  } else {
+    connList.innerHTML = [...nodeNeighbors].map(nId => {
+      const n = graphData.nodes.find(x => x.id === nId);
+      if (!n) return '';
+      const c = DOMAIN_COLORS[n.domain] || '#555';
+      return `<div class="conn-item" data-id="${n.id}"><span class="conn-dot" style="background:${c}"></span>${n.name}</div>`;
+    }).join('');
+
+    connList.querySelectorAll('.conn-item').forEach(el => {
+      el.addEventListener('click', () => {
+        const gd = graph.graphData();
+        const node3d = gd.nodes.find(n => n.id === el.dataset.id);
+        if (node3d) handleClick(node3d);
+      });
+    });
+  }
+
+  panel.classList.add('open');
+}
+</script>
+</body>
+</html>
